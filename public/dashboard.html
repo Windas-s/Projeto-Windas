@@ -8,14 +8,14 @@
   <link rel="stylesheet" href="css/dashboard.css" />
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="./js/sessao.js"></script>
 </head>
 
-<body>
+<body onload="validarSessao()">  
   <div class="grid_container">
     <aside class="aside">
       <div class="usuario_container">
-        <div class="usuario_foto"></div>
-        <h5>Olá (usuário)</h5>
+        <h5>Olá <span id="b_usuario">usuário</span>!</h5>
       </div>
       <ul>
         <li><img src="img/cama.svg" /><a href="pages/inicio.html">Visão geral</a></li>
