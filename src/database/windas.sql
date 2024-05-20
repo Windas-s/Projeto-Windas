@@ -1,3 +1,4 @@
+DROP DATABASE windas;
 CREATE DATABASE windas;
 USE windas;
 
@@ -14,10 +15,12 @@ CREATE TABLE hotel (
 
 CREATE TABLE funcionario (
 idFuncionario INT PRIMARY KEY AUTO_INCREMENT,
+fk_gerente INT,
 nomeFuncionario VARCHAR(50) NOT NULL, 
 emailFuncionario VARCHAR(100) NOT NULL,
 senha VARCHAR(20) NOT NULL,
 fk_hotel INT,
+CONSTRAINT fk_gerente FOREIGN KEY (fk_gerente) REFERENCES funcionario(idFuncionario), 
 CONSTRAINT fk_hotel FOREIGN KEY (fk_hotel) REFERENCES hotel(idHotel)
 );
 
@@ -80,9 +83,10 @@ VALUES
 
 INSERT INTO sistema_sensor (tipo, fk_quarto)
 VALUES 
-    ('DHT11 e TCRT5000', 1),
-     ('DHT11 e TCRT5000', 2),
-   ('DHT11 e TCRT5000', 3);
+    ('DHT11 e TCRT5000', 10),
+     ('DHT11 e TCRT5000', 11),
+   ('DHT11 e TCRT5000', 12),
+   ('DHT11 e TCRT5000', 13);
    
    
 
@@ -124,5 +128,57 @@ select hotel.nomeHotel,
  from hotel inner join quarto on quarto.fk_hotel = hotel.idHotel
  inner join sistema_sensor on sistema_sensor.fk_quarto = quarto.idQuarto
  inner join leitura on leitura.fk_sistema_sensor = sistema_sensor.idSistema_sensor;
-
+ 
+ SELECT * FROM quarto;
+ select * from sistema_sensor;
+    
+    INSERT INTO quarto (numero, andar, ocupacao, fk_hotel)
+VALUES 
+    (125, '6º andar', 'Desocupado', 1),
+    (126, '6º andar', 'Desocupado', 1),
+    (127, '6º andar', 'Desocupado', 1),
+    (128, '6º andar', 'Desocupado', 1),
+    (129, '6º andar', 'Desocupado', 1),
+    (130, '6º andar', 'Desocupado', 1),
+    (131, '6º andar', 'Desocupado', 1),
+    (132, '6º andar', 'Desocupado', 1),
+    (133, '6º andar', 'Desocupado', 1),
+    (134, '6º andar', 'Desocupado', 1);
+    
+    
+    SELECT 
+        l.dht11_temperatura AS temperatura, 
+        l.dht11_umidade AS umidade,
+        l.proximidade AS janela,
+        l.dataHora AS momento,
+        DATE_FORMAT(l.dataHora, '%H:%i:%s') AS momento_grafico
+            FROM leitura l
+            JOIN sistema_sensor ss ON l.fk_sistema_sensor = ss.idSistema_sensor
+            JOIN quarto q ON ss.fk_quarto = q.idQuarto
+            WHERE q.idQuarto = ss.fk_quarto;
+            
+            
+INSERT INTO leitura (dht11_temperatura, dht11_umidade, proximidade, dataHora, fk_sistema_sensor)
+VALUES 
+    (14.50, 55.00, '0', '2024-05-18 12:00:00', 4),
+    (14.50, 60.00, '0', '2024-05-18 12:05:00', 4),
+    (14.50, 58.50, '1', '2024-05-18 12:10:00', 4),
+    (14.50, 57.00, '0', '2024-05-18 12:15:00', 4),
+    (23.10, 56.00, '1', '2024-05-18 12:20:00', 4),
+    (21.80, 59.00, '0', '2024-05-18 12:25:00', 4),
+    (22.60, 55.50, '0', '2024-05-18 12:30:00', 4),
+    (23.30, 60.50, '1', '2024-05-18 12:35:00', 4),
+    (21.90, 58.75, '0', '2024-05-18 12:40:00', 4),
+    (14.50, 57.25, '1', '2024-05-18 12:45:00', 4);
+    
+    INSERT INTO leitura (dht11_temperatura, dht11_umidade, proximidade, dataHora, fk_sistema_sensor)
+VALUES 
+    (30.50, 55.00, '0', '2024-05-18 12:00:00', 7),
+    (19.50, 55.00, '0', '2024-05-18 12:00:00', 8),
+    (15.50, 55.00, '0', '2024-05-18 12:00:00', 9),
+    (23.50, 55.00, '0', '2024-05-18 12:00:00', 10),
+    (25.50, 55.00, '0', '2024-05-18 12:00:00', 11),
+    (22.50, 55.00, '0', '2024-05-18 12:00:00', 12),
+	(28.50, 55.00, '0', '2024-05-18 12:00:00', 13);
+    
 

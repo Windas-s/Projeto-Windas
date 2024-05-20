@@ -24,10 +24,10 @@ function autenticar(req, res) {
             .then((resultadoquartos) => {
               if (resultadoquartos.length > 0) {
                 res.json({
-                  id: resultadoAutenticar[0].id,
-                  email: resultadoAutenticar[0].email,
-                  nome: resultadoAutenticar[0].nome,
-                  senha: resultadoAutenticar[0].senha,
+                  id: resultadoAutenticar[0].idFuncionario,
+                  email: resultadoAutenticar[0].emailFuncionario,
+                  nome: resultadoAutenticar[0].nomeFuncionario,
+                  senha: resultadoAutenticar[0].senhaFuncionario,
                   quartos: resultadoquartos,
                 });
               } else {

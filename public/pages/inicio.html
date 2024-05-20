@@ -4,26 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
-    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/dash/visaoGeral.css" />
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../js/sessao.js"></script>
   </head>
 
-  <body onload="validarSessao()">
+  <body onload="validarSessao(), exibirQuartos(), atualizacaoPeriodica()">
     <div class="grid_container">
       <aside class="aside">
         <div class="usuario_container">
-          <div class="usuario_foto"></div>
           <div class="hello">
             <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
-        </div>
+          </div>
         </div>
         <ul>
           <li>
             <img src="../img/cama.svg" /><a
               href="inicio.html"
-              style="color: #001d6c; font-weight: bold;"
+              style="color: #001d6c; font-weight: bold"
               >Visão geral</a
             >
           </li>
@@ -34,7 +33,11 @@
           </li>
         </ul>
         <ul>
-          <li><img src="../img/cama.svg" /><a href="./quarto126.html"> Quarto N° 126 </a></li>
+          <li>
+            <img src="../img/cama.svg" /><a href="./quarto126.html">
+              Quarto N° 126
+            </a>
+          </li>
         </ul>
         <ul>
           <li>
@@ -89,31 +92,21 @@
           </div>
         </div>
       </div>
-
-      <a href="quarto127.html">
-        <div class="container_temperatura container" style="background-color: #FF7043;">
-          <h3 class="titulo_container">Quarto 127°</h3>
-          <p class="paragrafo_container">30°C 🌡️</p>
-          <span id="status-message">Temperatura acima</span>
-        </div>
-      </a>
-
-      <a href="../dashboard.html">
-        <div class="container_temperatura container bgColorTempQ126">
-          <h3 class="titulo_container">Quarto 125°</h3>
-          <p class="paragrafo_container">23°C 🌡️</p>
-          <span id="status-message">Temperatura Normal</span>
-        </div>
-      </a>
-
-      <a href="quarto126.html">
-        <div class="container_temperatura container bgColorUmiQ126">
-          <h3 class="titulo_container">Quarto 126°</h3>
-          <p class="paragrafo_container">23°C 🌡️</p>
-          <span id="status-message">Temperatura Normal</span>
-        </div>
-      </a>
-
+      <div id="cardQuartos"></div>
     </div>
   </body>
 </html>
+
+<script>
+  function exibirQuartos() {
+    JSON.parse(sessionStorage.quartos).forEach((item) => {
+      document.getElementById("cardQuartos").innerHTML += `
+                    <div id="card_${item.idQuarto}">
+                      <h3 class="titulo_container">Quarto ${item.numero}</h3>
+                      <p class="paragrafo_container" id="temp_quarto_${item.idQuarto}">°C 🌡️</p>
+                      <span id="descricao_quarto_${item.idQuarto}"></span>
+                    </div>
+                    `;
+    });
+  }
+</script>
