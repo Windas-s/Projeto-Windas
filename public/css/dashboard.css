@@ -31,11 +31,11 @@ a {
 .grid_container {
   display: grid;
   grid-template-columns: repeat(5, 1fr) auto;
-  grid-template-rows: 80px 80px repeat(3, 1fr) auto;
+  grid-template-rows: 80px 100px 80px repeat(3, 1fr) auto;
   grid-column-gap: 16px;
 
   width: 100%;
-  height: 100vh;
+
 }
 
 /* Container padrão */
@@ -50,7 +50,7 @@ a {
 
 /* Barra de navegação lateral */
 .aside {
-  grid-area: 2 / 1 / 6 / 2;
+  grid-area: 2 / 1 / 7 / 2;
   background-color: var(--azul-primario);
   box-shadow: 6px 16px 51px -33px rgba(0, 0, 0, 0.75);
   overflow: auto;
@@ -176,26 +176,53 @@ a {
   width: 100%;
 }
 
+/*-----------------API CLIMA TEMPO-------------------*/
+
+.clima_tempo_container {
+  grid-area: 2/2/3/7;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.infos {
+  display: flex;
+  justify-content: space-between;
+
+  width: 20%;
+}
+
+#temp_icon {
+  color: red;
+}
+
+#umid_icon {
+  color: rgb(0, 250, 246);
+}
+
+
 /* KPI's */
 .container_temperatura {
-  grid-area: 3 / 2 / 4 / 3;
+  grid-area: 4 / 2 / 5 / 3;
 }
 
 .container_umidade {
-  grid-area: 3 / 3 / 4 / 4;
+  grid-area: 4 / 3 / 4 / 4;
 }
 
 .container_proximidade {
-  grid-area: 3 / 4 / 4 / 5;
+  grid-area: 4 / 4 / 5 / 5;
 }
 
 .container_alerta {
-  grid-area: 3 / 5 / 4 / 6;
+  grid-area: 4 / 5 / 5 / 6;
   margin-right: 10px;
 }
 
 .titulos_metricas {
-  grid-area: 2 / 2 / 2 / 6;
+  grid-area: 3 / 2 / 4 / 6;
 
   display: flex;
   justify-content: center;
@@ -213,7 +240,7 @@ a {
 }
 
 .container_metricas {
-  grid-area: 2/2/3/6;
+  grid-area: 3/2/4/6;
   padding-left: 40px;
   padding-right: 50px;
   display: flex;
@@ -348,11 +375,11 @@ display: flex;
 /* Graficos de temperatura e umidade */
 
 .container_grafico-temperatura {
-  grid-area: 4 / 2 / 6 / 4;
+  grid-area: 5 / 2 / 7 / 4;
 }
 
 .container_grafico-umidade {
-  grid-area: 4 / 4 / 6 / 6;
+  grid-area: 5 / 4 / 7 / 6;
   margin-right: 10px;
 }
 
