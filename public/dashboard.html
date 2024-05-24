@@ -15,7 +15,7 @@
   <script src="js/clima_tempo.js"></script>
 </head>
 <!-- validarSessao() -->
-<body onload="">
+<body onload="chamarApi()">
 
   <div class="grid_container">
     <aside class="aside">
@@ -58,14 +58,17 @@
 
     <div class="clima_tempo_container">
       <h1 id="cidade">São Paulo</h1>
+      <div class="descricao"></div>
       <div class="infos">
         <div id="clima_tempo_temperatura">
           <i id="temp_icon" class="fa-solid fa-temperature-quarter"></i>
-          <span>Temperatura:</span>
+          <span>Temperatura:</span> 
+          <b id="temp_value"></b>
         </div>
         <div class="clima_tempo_umidade">
           <i id="umid_icon" class="fa-solid fa-droplet"></i>
           <span>Umidade:</span>
+          <b id="umid_value"></b>
         </div>
       </div>
     </div>
