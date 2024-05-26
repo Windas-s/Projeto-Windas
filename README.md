@@ -4,7 +4,6 @@
 Esse projeto gira em torno do problema que se localiza no falho monitoramento dos ambientes de hotelarias, onde pela falta ou devida relevância dada ao cuidado com o ambiente fazendo com que o mesmo possa sofrer com os maus-tratos do clima, afetando por exemplo, o perigo de maiores estragos internos devido a uma janela aberta durante uma intensa chuva. 
 ## Autores
 
-- [@Amanda Antunes](https://github.com/amandaantunes05)
 - [@Gustavo Rizerio](https://github.com/GustavoRizerioDev)
 - [@Gustavo Luz](https://github.com/GustavoLuzz)
 - [@Leticia Fonseca](https://github.com/letfonsecaa)
