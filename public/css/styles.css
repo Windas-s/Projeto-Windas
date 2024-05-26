@@ -134,7 +134,8 @@ button.button-login:hover {
 
 .conteudo-principal-escrito .conteudo-principal-escrito-paragrafo {
     font-size: 1.125rem;
-    color: var(--cinza-subtitulo);
+    color: #132b3f;;
+    font-weight: 700;
     max-width: 37.5rem;
     line-height: 1.7;
     padding-bottom: 1.875rem;
