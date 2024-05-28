@@ -12,9 +12,9 @@
     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="./js/sessao.js"></script>
-  <script src="js/clima_tempo.js"></script>
 </head>
 <!-- validarSessao() -->
+
 <body onload="chamarApi()">
 
   <div class="grid_container">
@@ -62,7 +62,7 @@
       <div class="infos">
         <div id="clima_tempo_temperatura">
           <i id="temp_icon" class="fa-solid fa-temperature-quarter"></i>
-          <span>Temperatura:</span> 
+          <span>Temperatura:</span>
           <b id="temp_value"></b>
         </div>
         <div class="clima_tempo_umidade">
@@ -135,9 +135,87 @@
       <canvas id="graficoUmidade"></canvas>
     </div>
   </div>
+
+  <div class="mensagem_erro"></div>
+
 </body>
 
 </html>
 
 <script src="js/script.js"></script>
 <script src="js/graficos.js"></script>
+
+<script>
+
+  async function chamarApi() {
+    // const { json } = require("express");
+    const apiKey = '910c4efbe73c746cce373fd23d6fdf43';
+    const cidade = 'São Paulo'
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(cidade)}&appid=${apiKey}&units=metric&lang=pt_br`;
+    const results = await fetch(apiUrl);
+    const json = await results.json();
+
+    if (json.cod === 200) {
+      mostrarInfo({
+        cidade: json.name,
+        pais: json.sys.country,
+        temp: json.main.temp,
+        umidade: json.main.humidity,
+        descricao: json.weather[0].description,
+        tempIcon: json.weather[0].icon
+      });
+    } else {
+      alert("Ocoreu um erro de leitura do tempo externo...");
+    }
+  }
+
+  function mostrarInfo(json) {
+    document.querySelector('#cidade').innerHTML = `${json.cidade}, ${json.pais}`;
+
+    document.querySelector('#temp_value').innerHTML = `${json.temp.toFixed(1).toString().replace('.', ',')} <sup>Cº</sup>`;
+
+    document.querySelector('#umid_value').innerHTML = `${json.umidade}`;
+
+  }
+
+
+  setInterval(async function inserirClima() {
+    const apiKey = '910c4efbe73c746cce373fd23d6fdf43';
+    const cidade = 'São Paulo'
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(cidade)}&appid=${apiKey}&units=metric&lang=pt_br`;
+    const results = await fetch(apiUrl);
+    const json = await results.json();
+
+    fetch("/clima/armazenarClima", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        cidadeServer: json.name,
+        tempServer: json.main.temp,
+        umidadeServer: json.main.humidity
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+
+          console.log("Métricas inseridas com sucesso no banco de dados!");
+
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    return false;
+
+  }, 5000);
+
+</script>

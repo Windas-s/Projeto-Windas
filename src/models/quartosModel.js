@@ -2,7 +2,7 @@ var database = require("../database/config");
 
 function buscarQuartosPorHotel(hotelId) {
 
-  var instrucaoSql = `SELECT * FROM quarto a WHERE fk_hotel = ${hotelId}`;
+  var instrucaoSql = `SELECT * FROM quarto WHERE fk_hotel = ${hotelId}`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);

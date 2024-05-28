@@ -22,6 +22,7 @@ var usuarioRouter = require("./src/routes/usuarios");
 var medidasRouter = require("./src/routes/medidas");
 var quartosRouter = require("./src/routes/quartos");
 var hotelRouter = require("./src/routes/hotel");
+var climaRouter = require("./src/routes/clima");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -35,6 +36,7 @@ app.use("/usuarios", usuarioRouter);
 app.use("/medidas", medidasRouter); 
 app.use("/quartos", quartosRouter);
 app.use("/hotel", hotelRouter);
+app.use("/clima", climaRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`

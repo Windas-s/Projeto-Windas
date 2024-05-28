@@ -54,7 +54,17 @@ CREATE TABLE leitura (
   CONSTRAINT fk_sistema_sensor FOREIGN KEY (fk_sistema_sensor) REFERENCES sistema_sensor(idSistema_sensor)
 );
 
+create table infoClima (
+	idClima int auto_increment,
+    temperatura decimal(3,1),
+    umidade int,
+    fkQuarto int,
+    
+    constraint pk_clima primary key(idClima),
+    constraint fk_clima_quarto foreign key(fkQuarto) references quarto(idQuarto)
+);
 
+alter table infoClima add column cidade varchar(45);
 
 INSERT INTO hotel (nomeHotel,emailHotel, senha)
 VALUES 
@@ -83,10 +93,9 @@ VALUES
 
 INSERT INTO sistema_sensor (tipo, fk_quarto)
 VALUES 
-    ('DHT11 e TCRT5000', 10),
-     ('DHT11 e TCRT5000', 11),
-   ('DHT11 e TCRT5000', 12),
-   ('DHT11 e TCRT5000', 13);
+    ('DHT11 e TCRT5000', 1),
+     ('DHT11 e TCRT5000', 2),
+   ('DHT11 e TCRT5000', 3);
    
    
 
@@ -105,6 +114,8 @@ SELECT * FROM quarto;
 SELECT * FROM sistema_sensor;
 
 SELECT * FROM leitura;
+
+SELECT * FROM infoClima;
 
 select hotel.nomeHotel,
 	   funcionario.*
@@ -157,28 +168,31 @@ VALUES
             JOIN quarto q ON ss.fk_quarto = q.idQuarto
             WHERE q.idQuarto = ss.fk_quarto;
             
+
+select * from sistema_sensor;
             
 INSERT INTO leitura (dht11_temperatura, dht11_umidade, proximidade, dataHora, fk_sistema_sensor)
 VALUES 
-    (14.50, 55.00, '0', '2024-05-18 12:00:00', 4),
-    (14.50, 60.00, '0', '2024-05-18 12:05:00', 4),
-    (14.50, 58.50, '1', '2024-05-18 12:10:00', 4),
-    (14.50, 57.00, '0', '2024-05-18 12:15:00', 4),
-    (23.10, 56.00, '1', '2024-05-18 12:20:00', 4),
-    (21.80, 59.00, '0', '2024-05-18 12:25:00', 4),
-    (22.60, 55.50, '0', '2024-05-18 12:30:00', 4),
-    (23.30, 60.50, '1', '2024-05-18 12:35:00', 4),
-    (21.90, 58.75, '0', '2024-05-18 12:40:00', 4),
-    (14.50, 57.25, '1', '2024-05-18 12:45:00', 4);
+    (14.50, 55.00, '0', '2024-05-18 12:00:00', 3),
+    (14.50, 60.00, '0', '2024-05-18 12:05:00', 3),
+    (14.50, 58.50, '1', '2024-05-18 12:10:00', 3),
+    (14.50, 57.00, '0', '2024-05-18 12:15:00', 3),
+    (23.10, 56.00, '1', '2024-05-18 12:20:00', 3),
+    (21.80, 59.00, '0', '2024-05-18 12:25:00', 3),
+    (22.60, 55.50, '0', '2024-05-18 12:30:00', 3),
+    (23.30, 60.50, '1', '2024-05-18 12:35:00', 3),
+    (21.90, 58.75, '0', '2024-05-18 12:40:00', 3),
+    (14.50, 57.25, '1', '2024-05-18 12:45:00', 3);
     
     INSERT INTO leitura (dht11_temperatura, dht11_umidade, proximidade, dataHora, fk_sistema_sensor)
 VALUES 
-    (30.50, 55.00, '0', '2024-05-18 12:00:00', 7),
-    (19.50, 55.00, '0', '2024-05-18 12:00:00', 8),
-    (15.50, 55.00, '0', '2024-05-18 12:00:00', 9),
-    (23.50, 55.00, '0', '2024-05-18 12:00:00', 10),
-    (25.50, 55.00, '0', '2024-05-18 12:00:00', 11),
-    (22.50, 55.00, '0', '2024-05-18 12:00:00', 12),
-	(28.50, 55.00, '0', '2024-05-18 12:00:00', 13);
+    (30.50, 55.00, '0', '2024-05-18 12:00:00', 1),
+    (19.50, 55.00, '0', '2024-05-18 12:00:00', 2),
+    (15.50, 55.00, '0', '2024-05-18 12:00:00', 3),
+    (23.50, 55.00, '0', '2024-05-18 12:00:00', 1),
+    (25.50, 55.00, '0', '2024-05-18 12:00:00', 2),
+    (22.50, 55.00, '0', '2024-05-18 12:00:00', 3),
+	(28.50, 55.00, '0', '2024-05-18 12:00:00', 1);
+    
     
 
