@@ -367,6 +367,7 @@ button.button-nossa-equipe:hover {
     justify-content: center;
     align-items: center;
     padding: 0 0 3.75rem;
+    
 }
 
 .conteudo-fale-conosco-titulo {
@@ -392,6 +393,9 @@ button.button-nossa-equipe:hover {
     padding: .8125rem 0 .625rem;
 }
 
+.fale-conosco-formulario {
+    width: 900px;
+}
 
 input {
     width: 50rem;
