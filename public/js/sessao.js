@@ -1,9 +1,9 @@
 // sessão
 function validarSessao() {
-    var email = sessionStorage.EMAIL_USUARIO;
-    var nome = sessionStorage.NOME_USUARIO;
+    let email = sessionStorage.EMAIL_USUARIO;
+    let nome = sessionStorage.NOME_USUARIO;
 
-    var b_usuario = document.getElementById("b_usuario");
+    let b_usuario = document.getElementById("b_usuario");
 
     if (email != null && nome != null) {
         b_usuario.innerHTML = nome;
@@ -12,40 +12,19 @@ function validarSessao() {
     }
 }
 
-function obterdados(idQuarto) {
-    fetch(`/medidas/tempo-real/${idQuarto}`)
-        .then(resposta => {
-            if (resposta.status == 200) {
-                resposta.json().then(resposta => {
-
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-
-                    alertar(resposta, idQuarto);
-                });
-            } else {
-                console.error(`Nenhum dado encontrado para o id ${idQuarto} ou erro na API`);
-            }
-        })
-        .catch(function (error) {
-            console.error(`Erro na obtenção dos dados do aquario p/ gráfico: ${error.message}`);
-        });
-
-}
-
-
 function alertar(resposta, idQuarto) {
-    var temp = resposta[0].temperatura;
+    let temp = resposta[0].temperatura;
 
-    var grauDeAviso = '';
+    let grauDeAviso = '';
     
 
-    var limites = {
+    let limites = {
         quente: 25,
         ideal: 20,
         frio: 19,
     };
 
-    var classe_temperatura = 'cor-alerta';
+    let classe_temperatura = 'cor-alerta';
 
     if (temp < limites.ideal) {
         classe_temperatura = 'temperatura-baixa container card';
@@ -60,7 +39,7 @@ function alertar(resposta, idQuarto) {
         document.getElementById(`descricao_quarto_${idQuarto}`).innerHTML = 'Temperatura acima';
     }
 
-    var card;
+    let card;
 
     if (document.getElementById(`temp_quarto_${idQuarto}`) != null) {
         document.getElementById(`temp_quarto_${idQuarto}`).innerHTML = temp + "°C";
@@ -79,3 +58,28 @@ function atualizacaoPeriodica() {
     });
     setTimeout(atualizacaoPeriodica, 5000);
 }
+
+
+function obterdados(idQuarto) {
+fetch(`/medidas/tempo-real/${idQuarto}`)
+        .then(resposta => {
+            if (resposta.status == 200) {
+                resposta.json().then(resposta => {
+
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                    alertar(resposta, idQuarto);
+                });
+            } else {
+                console.error(`Nenhum dado encontrado para o id ${idQuarto} ou erro na API`);
+            }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados do quarto p/ gráfico: ${error.message}`);
+        });
+
+}
+
+
+
+

@@ -28,7 +28,7 @@ function autenticar(req, res) {
                   email: resultadoAutenticar[0].emailFuncionario,
                   nome: resultadoAutenticar[0].nomeFuncionario,
                   senha: resultadoAutenticar[0].senhaFuncionario,
-                  quartos: resultadoquartos,
+                  quartos: resultadoquartos
                 });
               } else {
                 res.status(204).json({ quartos: [] });

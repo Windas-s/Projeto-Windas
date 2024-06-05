@@ -7,11 +7,11 @@ function armazenarClima(req, res) {
 
     // Faça as validações dos valores
     if (cidade == undefined) {
-        res.status(400).send("Seu nome está undefined!");
+        res.status(400).send("A cidade está undefined!");
     } else if (temperatura == undefined) {
-        res.status(400).send("Seu email está undefined!");
+        res.status(400).send("A temperatura estpá undefined!");
     } else if (umidade == undefined) {
-        res.status(400).send("Sua senha está undefined!");
+        res.status(400).send("A umidade está undefined!");
     }
     // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
     else

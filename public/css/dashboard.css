@@ -105,7 +105,7 @@ a {
   padding: 0;
 }
 
-.aside li {
+.aside button {
   margin-bottom: 20px;
   background-color: var(--cinza-basico);
 
@@ -408,4 +408,11 @@ display: flex;
   box-shadow: 6px 16px 29px -22px rgba(0, 0, 0, 0.23);
   height: 200px;
   width: 300px;
+}
+
+
+.btn_quarto {
+  color: blue; 
+  background-color: red;
+  width: 100%;
 }
