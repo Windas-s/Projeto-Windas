@@ -145,11 +145,11 @@
         <span id="status-message">-</span>
       </div>
 
-      <div class="container_grafico-temperatura">
-        <canvas id="graficoTemperatura"></canvas>
-      </div>
+      <div id="graficos"></div>
 
-      <div class="container_grafico-umidade">
+      <div class="container_grafico-temperatura" id="grafico-temperatura"></div>
+
+      <div class="container_grafico-umidade" id="grafico-umidade">
         <canvas id="graficoUmidade"></canvas>
       </div>
     </div>
@@ -238,7 +238,7 @@
       });
 
     return false;
-  }, 100000);
+  }, 200000);
 
   b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
@@ -318,26 +318,27 @@
         
         <button 
           class="btn_quarto" 
-          onclick="exibirQuartos(${item.idQuarto}, ${item.numero})"
-          id="ul_quartos${item.idQuarto}">
+          onclick="obterDadosGrafico(${item.idQuarto}, ${item.numero})"
+          id="ul_quartos${item.numero}">
            ${item.numero}
         </button>
         
       `;
 
-      document.getElementById("graficos").innerHTML += `
+      document.getElementById("grafico-temperatura").innerHTML += `
             <div id="grafico${item.idQuarto}" class="display-none">
-                <h3 class="tituloGraficos">
-                    <span id="tituloQuarto${item.idQuarto}">${item.numero}</span>
-                </h3>
-                <div class="graph">
-                    <canvas id="myChartCanvas${item.idQuarto}"></canvas>
+                <div class="container_grafico-temperatura">
+                    <canvas id="graficoTemperatura${item.idQuarto}"></canvas>
+                </div>
+                <div class="container_grafico-umidade" 
+                    <canvas id="graficoUmidade${item.idQuarto}"></canvas>
                 </div>
                 <div class="label-captura">
                     <p id="avisoCaptura${item.idQuarto}" style="color: white"></p>
                 </div>
             </div>
         `;
+
       obterDadosGrafico(item.id);
     });
   }
@@ -456,26 +457,26 @@
 
     // Adicionando gráfico criado em div na tela
     let myChart = new Chart(
-      document.getElementById(`myChartCanvas${idQuarto}`),
+      document.getElementById(`graficoTemperatura${idQuarto}`),
       config
     );
 
     setTimeout(() => atualizarGrafico(idQuarto, dados, myChart), 2000);
   }
 
-  function atualizarGrafico(idAquario, dados, myChart) {
-    fetch(`/medidas/tempo-real/${idAquario}`, { cache: "no-store" })
+  function atualizarGrafico(idQuarto, dados, myChart) {
+    fetch(`/medidas/tempo-real/${idQuarto}`, { cache: "no-store" })
       .then(function (response) {
         if (response.ok) {
           response.json().then(function (novoRegistro) {
-            obterdados(idAquario);
+            obterdados(idQuarto);
             // alertar(novoRegistro, idAquario);
             console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
             console.log(`Dados atuais do gráfico:`);
             console.log(dados);
 
             let avisoCaptura = document.getElementById(
-              `avisoCaptura${idAquario}`
+              `avisoCaptura${idQuarto}`
             );
             avisoCaptura.innerHTML = "";
 
@@ -514,7 +515,7 @@
 
             // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
             proximaAtualizacao = setTimeout(
-              () => atualizarGrafico(idAquario, dados, myChart),
+              () => atualizarGrafico(idQuarto, dados, myChart),
               2000
             );
           });
@@ -522,7 +523,7 @@
           console.error("Nenhum dado encontrado ou erro na API");
           // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
           proximaAtualizacao = setTimeout(
-            () => atualizarGrafico(idAquario, dados, myChart),
+            () => atualizarGrafico(idQuarto, dados, myChart),
             2000
           );
         }
