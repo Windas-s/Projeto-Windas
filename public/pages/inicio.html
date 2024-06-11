@@ -28,39 +28,16 @@
           </li>
           <li>
             <img src="../img/cama.svg" /><a href="../dashboard.html"
-              >Quarto N° 125</a
+              >Quartos</a
             >
           </li>
-        </ul>
-        <ul>
-          <li>
-            <img src="../img/cama.svg" /><a href="./quarto126.html">
-              Quarto N° 126
-            </a>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <img src="../img/cama.svg" /><a href="./quarto127.html"
-              >Quarto N° 127</a
-            >
-            <span class="alert-icon" style="padding-left: 30px; font-size: 35px"
-              >⚠️</span
+          <li class="btn-sair">
+            <img src="../img/cama.svg" /><a onclick="limparSessao()"
+              >Sair</a
             >
           </li>
         </ul>
       </aside>
-      <header class="cabecalho">
-        <ul class="navbar">
-          <li>Inicial</li>
-          <li>Simulador</li>
-        </ul>
-        <img src="../img/logo.svg" />
-        <ul class="navbar">
-          <li>Sobre nós</li>
-          <li>Fale conosco</li>
-        </ul>
-      </header>
 
       <div class="titulos_metricas">
         <span id="temperatura">Temperatura</span>
@@ -69,25 +46,25 @@
 
       <div class="container_metricas">
         <div class="container-metricas-temperaturas">
-          <div id="alerta_temperatura_baixa">
+          <div id="alerta_temperatura_baixa" class="altura-certa">
             <span>Abaixo 15Cº</span>
           </div>
-          <div id="alerta_temperatura_ideal">
+          <div id="alerta_temperatura_ideal" class="altura-certa">
             <span>Acima 23Cº até 25Cº</span>
           </div>
-          <div id="alerta_temperatura_alta">
+          <div id="alerta_temperatura_alta" class="altura-certa">
             <span>Acima de 25Cº</span>
           </div>
         </div>
 
-        <div class="container-metricas-umidades">
-          <div id="alerta_umidade_baixa">
+        <div class="container-metricas-umidades" class="altura-certa">
+          <div id="alerta_umidade_baixa" class="altura-certa">
             <span>Abaixo de 30%</span>
           </div>
-          <div id="alerta_umidade_ideal">
+          <div id="alerta_umidade_ideal" class="altura-certa">
             <span>Acima de 30% até 60%</span>
           </div>
-          <div id="alerta_umidade_alta">
+          <div id="alerta_umidade_alta" class="altura-certa">
             <span>Acima de 60%</span>
           </div>
         </div>
@@ -98,15 +75,17 @@
 </html>
 
 <script>
-  function exibirQuartos() {
-    JSON.parse(sessionStorage.quartos).forEach((item) => {
+    function exibirQuartos() {
+    const quartos = JSON.parse(sessionStorage.quartos);
+    
+    quartos.forEach((item) => {
       document.getElementById("cardQuartos").innerHTML += `
-                    <div id="card_${item.idQuarto}">
-                      <h3 class="titulo_container">Quarto ${item.numero}</h3>
-                      <p class="paragrafo_container" id="temp_quarto_${item.idQuarto}">°C 🌡️</p>
-                      <span id="descricao_quarto_${item.idQuarto}"></span>
-                    </div>
-                    `;
+        <div id="card_${item.idQuarto}">
+          <h3 class="titulo_container">Quarto ${item.numero}</h3>
+          <p class="paragrafo_container" id="temp_quarto_${item.idQuarto}">${item.temperatura}°C 🌡️</p>
+          <span id="descricao_quarto_${item.idQuarto}" style='font-weight: bold'></span>
+        </div>
+      `;
     });
   }
 </script>

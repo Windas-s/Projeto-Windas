@@ -12,6 +12,11 @@ function validarSessao() {
     }
 }
 
+function limparSessao() {
+    sessionStorage.clear();
+    window.location = "../login.html";
+}
+
 function alertar(resposta, idQuarto) {
     let temp = resposta[0].temperatura;
 
@@ -19,8 +24,8 @@ function alertar(resposta, idQuarto) {
     
 
     let limites = {
-        quente: 25,
-        ideal: 20,
+        quente: 26,
+        ideal: 24,
         frio: 19,
     };
 
@@ -29,6 +34,7 @@ function alertar(resposta, idQuarto) {
     if (temp < limites.ideal) {
         classe_temperatura = 'temperatura-baixa container card';
         document.getElementById(`descricao_quarto_${idQuarto}`).innerHTML = 'Temperatura baixa';
+        document.getElementById(`temp_quarto_${idQuarto}`).innerHTML += "⚠️";
     }
     else if (temp >= limites.ideal && temp <= limites.quente) {
         classe_temperatura = 'temperatura-ideal container card';
@@ -37,6 +43,7 @@ function alertar(resposta, idQuarto) {
     else if (temp > limites.quente) {
         classe_temperatura = 'temperatura-quente container card';
         document.getElementById(`descricao_quarto_${idQuarto}`).innerHTML = 'Temperatura acima';
+        document.getElementById(`temp_quarto_${idQuarto}`).innerHTML += "⚠️";
     }
 
     let card;
@@ -79,7 +86,6 @@ fetch(`/medidas/tempo-real/${idQuarto}`)
         });
 
 }
-
 
 
 

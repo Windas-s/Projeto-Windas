@@ -54,6 +54,11 @@ CREATE TABLE leitura (
   CONSTRAINT fk_sistema_sensor FOREIGN KEY (fk_sistema_sensor) REFERENCES sistema_sensor(idSistema_sensor)
 );
 
+INSERT INTO leitura (dht11_temperatura, dht11_umidade, proximidade, fk_sistema_sensor)
+VALUES 
+  (30, 60.50, '0', 6);
+  
+  select * from quarto;
 
 
 INSERT INTO hotel (nomeHotel,emailHotel, senha)
@@ -77,15 +82,18 @@ VALUES (null,'Fernanda Menezes','fernandamenezes@gmail.com','1258#f&r', 1),
 
 INSERT INTO quarto (numero, andar, ocupacao, fk_hotel)
 VALUES 
-    (125, '6º andar', 'Desocupado', 1),
-    (126, '6º andar', 'Ocupado', 2),
-    (127, '6º andar', 'Desocupado', 3);
+    (126, '6º andar', 'Desocupado', 1),
+    (127, '6º andar', 'Ocupado', 1),
+    (128, '6º andar', 'Desocupado', 1),
+    (129, '6º andar', 'Desocupado', 1),
+    (130, '6º andar', 'Desocupado', 1),
+    (131, '6º andar', 'Desocupado', 1);
 
 INSERT INTO sistema_sensor (tipo, fk_quarto)
 VALUES 
-    ('DHT11 e TCRT5000', 1),
-     ('DHT11 e TCRT5000', 2),
-   ('DHT11 e TCRT5000', 3);
+    ('DHT11 e TCRT5000', 7),
+     ('DHT11 e TCRT5000', 8),
+   ('DHT11 e TCRT5000', 9);
    
    
 
@@ -104,6 +112,7 @@ SELECT * FROM quarto;
 SELECT * FROM sistema_sensor;
 
 SELECT * FROM leitura;
+truncate leitura;
 
 select hotel.nomeHotel,
 	   funcionario.*
@@ -128,4 +137,66 @@ select hotel.nomeHotel,
  inner join sistema_sensor on sistema_sensor.fk_quarto = quarto.idQuarto
  inner join leitura on leitura.fk_sistema_sensor = sistema_sensor.idSistema_sensor;
 
+select * from funcionario;
 
+create table infoClima (
+	idClima int auto_increment,
+    temperatura decimal(3,1),
+    umidade int,
+    fkQuarto int,
+    
+    constraint pk_clima primary key(idClima),
+    constraint fk_clima_quarto foreign key(fkQuarto) references quarto(idQuarto)
+);
+
+alter table infoClima add column cidade varchar(45);
+
+delete from funcionario where idfuncionario = 2;
+
+select * from infoClima;
+delete from infoclima where idClima > 1;
+
+select * from funcionario;
+select * from quarto;
+select * from leitura;
+select * from sistema_sensor;
+
+select * from leitura;
+
+SELECT 
+		l.idLeitura,
+        round(l.dht11_temperatura) AS temperatura, 
+        round(l.dht11_umidade) AS umidade,
+        round(i.temperatura) AS temperaturaFora, 
+        round(i.umidade) AS umidadeFora,
+        l.proximidade AS janela,
+        l.dataHora AS momento,
+        DATE_FORMAT(l.dataHora, '%H:%i:%s') AS momento_grafico
+            FROM leitura l
+            JOIN sistema_sensor ss ON l.fk_sistema_sensor = ss.idSistema_sensor
+            JOIN quarto q ON ss.fk_quarto = q.idQuarto
+            join infoClima i on i.idclima = i.idclima
+            WHERE q.idQuarto = 1
+            ORDER BY temperatura > 25 or temperatura < 15 desc LIMIT 7;
+		
+            
+            select * from leitura;
+            
+            SELECT 
+        round(l.dht11_temperatura) AS temperatura, 
+        round(l.dht11_umidade) AS umidade,
+        l.proximidade AS janela,
+        l.dataHora,
+        DATE_FORMAT(l.dataHora, '%H:%i:%s') AS momento_grafico,
+        l.fk_sistema_sensor 
+            FROM leitura l
+            JOIN sistema_sensor ss ON l.fk_sistema_sensor = ss.idSistema_sensor
+            JOIN quarto q ON ss.fk_quarto = q.idQuarto
+            WHERE q.idQuarto = 1
+            ORDER BY 
+              CASE 
+              WHEN temperatura > 25 THEN 1
+                WHEN temperatura BETWEEN 15 AND 22 THEN 2
+                ELSE 3
+              END, 
+              temperatura;

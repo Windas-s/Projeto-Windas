@@ -15,8 +15,8 @@ void loop() {
   float umidade = dht_1.readHumidity();         // Define variavel Umidade com valor Float da biblioteca DHT
   float temperatura = dht_1.readTemperature();  // Define variavel Temperatura com valor Float da biblioteca DHT
   int fksensorUm = 1; 
-  int fksensorDois = 2; 
-  int fksensorTres = 3;
+  int fksensorDois = 4; 
+  int fksensorTres = 5;
   int chave;  
 
   if (digitalRead(pinoSensor) == LOW) {  // Se o sensor detectar algo.
@@ -51,5 +51,5 @@ void loop() {
     Serial.println(fksensorTres); 
   }
 
-  delay(5000);  // Tempo para consultar os dados novamente
+  delay(10000);  // Tempo para consultar os dados novamente
 }

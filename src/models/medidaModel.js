@@ -2,14 +2,15 @@ var database = require("../database/config");
 
 function buscarUltimasMedidas(idQuarto, limite_linhas) {
   var instrucaoSql = `SELECT 
-        l.dht11_temperatura AS temperatura, 
-        l.dht11_umidade AS umidade,
-        l.proximidade AS janela,
-        l.dataHora AS momento,
+        round(l.dht11_temperatura) AS temperatura, 
+        round(l.dht11_umidade) AS umidade,
+        round(i.temperatura) AS temperaturaFora, 
+        round(i.umidade) AS umidadeFora,
         DATE_FORMAT(l.dataHora, '%H:%i:%s') AS momento_grafico
             FROM leitura l
             JOIN sistema_sensor ss ON l.fk_sistema_sensor = ss.idSistema_sensor
             JOIN quarto q ON ss.fk_quarto = q.idQuarto
+            join infoClima i on i.idclima = i.idclima
             WHERE q.idQuarto = ${idQuarto}
             ORDER BY l.idLeitura DESC LIMIT ${limite_linhas}`;
 
@@ -19,15 +20,17 @@ function buscarUltimasMedidas(idQuarto, limite_linhas) {
 
 function buscarMedidasEmTempoReal(idQuarto) {
     var instrucaoSql = `SELECT 
-        l.dht11_temperatura AS temperatura, 
-        l.dht11_umidade AS umidade,
-        l.proximidade AS janela,
+        round(l.dht11_temperatura) AS temperatura, 
+        round(l.dht11_umidade) AS umidade,
+        round(i.temperatura) AS temperaturaFora, 
+        round(i.umidade) AS umidadeFora,
         l.dataHora,
             DATE_FORMAT(l.dataHora, '%H:%i:%s') AS momento_grafico,
             l.fk_sistema_sensor 
             FROM leitura l
             JOIN sistema_sensor ss ON l.fk_sistema_sensor = ss.idSistema_sensor
             JOIN quarto q ON ss.fk_quarto = q.idQuarto
+            join infoClima i on i.idclima = i.idclima
             WHERE q.idQuarto = ${idQuarto}
             ORDER BY l.idLeitura DESC LIMIT 1`;
 
