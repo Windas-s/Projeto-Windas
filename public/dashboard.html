@@ -20,7 +20,7 @@
   </head>
   <!-- validarSessao() -->
 
-  <body onload="chamarApi() , setTimeout(exibirQuartosDoUsuario, 2000)">
+  <body onload="chamarApi(), preencherSelectAndares(), setTimeout(exibirQuartosDoUsuario, 2000)">
     <div class="grid_container">
       <aside class="aside">
         <div class="usuario_container">
@@ -33,6 +33,11 @@
             >
           </li>
         </ul>
+        <li>
+          <img src="img/cama.svg" />
+          <select id="andar_select" onchange="exibirQuartosDoUsuario()">
+          </select>
+        </li>
         <ul id="ul_quartos"></ul>
       </aside>
       <!-- <header class="cabecalho">
@@ -104,8 +109,7 @@
         id="kpi-umidade"
       ></div>
 
-      <div class="container_proximidade container" id="kpi-proximidade">
-      </div>
+      <div class="container_proximidade container" id="kpi-proximidade"></div>
 
       <div class="container_alerta container" id="kpi-alerta"></div>
 
@@ -207,77 +211,30 @@
 
   let proximaAtualizacao;
 
-  window.onload = exibirQuartosDoUsuario();
+  function preencherSelectAndares() {
+    var quartos = JSON.parse(sessionStorage.quartos);
+    var selectAndar = document.getElementById("andar_select");
+    var andares = [...new Set(quartos.map((quarto) => quarto.andar))]; // Remover duplicatas
 
-  // function exibirQuartosDoUsuario_original() {
-  //   var quartos = JSON.parse(sessionStorage.quartos);
-  //   quartos.forEach((item) => {
-  //     document.getElementById("ul_quartos").innerHTML += `
-  //       <button onclick="exibirQuartos(${item.idQuarto})" id="ul_quartos${item.idQuarto}">${item.numero}</button>
-  //       `;
-
-  //     document.getElementById("graficos").innerHTML += `
-  //           <div id="grafico${item.idQuarto}" class="display-none">
-  //               <h3 class="tituloGraficos">
-  //                   <span id="tituloQuarto${item.idQuarto}">${item.numero}</span>
-  //               </h3>
-  //               <div class="graph">
-  //                   <canvas id="myChartCanvas${item.idQuarto}"></canvas>
-  //               </div>
-  //               <div class="label-captura">
-  //                   <p id="avisoCaptura${item.idQuarto}" style="color: white"></p>
-  //               </div>
-  //           </div>
-  //       `;
-
-  //     function exibirQuartos(idQuarto) {
-  //       let todosOsGraficos = JSON.parse(sessionStorage.quartos);
-
-  //       for (i = 0; i < todosOsGraficos.length; i++) {
-  //         // exibindo - ou não - o gráfico
-  //         if (todosOsGraficos[i].id != idQuarto) {
-  //           let elementoAtual = document.getElementById(
-  //             `grafico${todosOsGraficos[i].id}`
-  //           );
-  //           if (elementoAtual.classList.contains("display-block")) {
-  //             elementoAtual.classList.remove("display-block");
-  //           }
-  //           elementoAtual.classList.add("display-none");
-
-  //           // alterando estilo do botão
-  //           let btnAtual = document.getElementById(
-  //             `btnAquario${todosOsGraficos[i].id}`
-  //           );
-  //           if (btnAtual.classList.contains("btn-pink")) {
-  //             btnAtual.classList.remove("btn-pink");
-  //           }
-  //           btnAtual.classList.add("btn-white");
-  //         }
-  //       }
-
-  //       // exibindo - ou não - o gráfico
-  //       let graficoExibir = document.getElementById(`grafico${idAquario}`);
-  //       graficoExibir.classList.remove("display-none");
-  //       graficoExibir.classList.add("display-block");
-
-  //       // alterando estilo do botão
-  //       let btnExibir = document.getElementById(`btnAquario${idAquario}`);
-  //       btnExibir.classList.remove("btn-white");
-  //       btnExibir.classList.add("btn-pink");
-  //     }
-
-  //     obterDadosGrafico(item.id);
-  //   });
-
-  //   if (aquarios.length > 0) {
-  //     exibirQuartos(aquarios[0].id);
-  //   }
-  // }
+    andares.forEach((andar) => {
+      var option = document.createElement("option");
+      option.value = andar;
+      option.textContent = andar;
+      selectAndar.appendChild(option);
+    });
+  }
 
   function exibirQuartosDoUsuario() {
     var quartos = JSON.parse(sessionStorage.quartos);
     var ul_quartos = document.getElementById("ul_quartos");
-    ul_quartos.innerHTML = ""; 
+    ul_quartos.innerHTML = "";
+
+    var andarSelecionado = document.getElementById("andar_select").value;
+
+    // Filtrar quartos por andar
+    if (andarSelecionado) {
+      quartos = quartos.filter((quarto) => quarto.andar === andarSelecionado);
+    }
 
     quartos.forEach((item) => {
       fetch(`/medidas/tempo-real/${item.idQuarto}`, { cache: "no-store" })
@@ -295,11 +252,14 @@
                         onclick="obterDadosGrafico(${item.idQuarto}, ${item.numero})">
                       <img src="img/cama.svg" />
                       Quarto ${item.numero}
-                      ${alerta ? '<span class="alerta-li"><img src="img/alert.png" class="alerta-li"/></span>' : ""}
+                      ${
+                        alerta
+                          ? '<span class="alerta-li"><img src="img/alert.png" class="alerta-li"/></span>'
+                          : ""
+                      }
                     </li>
                   `;
             });
-            
           } else {
             console.error("Nenhum dado encontrado ou erro na API");
           }
@@ -322,7 +282,7 @@
     if (quartos.length > 0) {
       setTimeout(() => {
         obterDadosGrafico(quartos[0].idQuarto, quartos[0].numero);
-      }, 1000); 
+      }, 1000);
     }
   }
 

@@ -56,7 +56,7 @@ CREATE TABLE leitura (
 
 INSERT INTO leitura (dht11_temperatura, dht11_umidade, proximidade, fk_sistema_sensor)
 VALUES 
-  (30, 60.50, '0', 6);
+  (30, 60.50, '0', 1);
   
   select * from quarto;
 
@@ -82,18 +82,26 @@ VALUES (null,'Fernanda Menezes','fernandamenezes@gmail.com','1258#f&r', 1),
 
 INSERT INTO quarto (numero, andar, ocupacao, fk_hotel)
 VALUES 
-    (126, '6º andar', 'Desocupado', 1),
-    (127, '6º andar', 'Ocupado', 1),
-    (128, '6º andar', 'Desocupado', 1),
-    (129, '6º andar', 'Desocupado', 1),
-    (130, '6º andar', 'Desocupado', 1),
-    (131, '6º andar', 'Desocupado', 1);
+    (132, '7º andar', 'Desocupado', 1),
+    (133, '7º andar', 'Ocupado', 1),
+    (134, '7º andar', 'Desocupado', 1),
+    (135, '7º andar', 'Desocupado', 1),
+    (136, '7º andar', 'Desocupado', 1),
+    (137, '7º andar', 'Desocupado', 1);
+    
+    select * from quarto;
 
 INSERT INTO sistema_sensor (tipo, fk_quarto)
 VALUES 
-    ('DHT11 e TCRT5000', 7),
-     ('DHT11 e TCRT5000', 8),
-   ('DHT11 e TCRT5000', 9);
+    ('DHT11 e TCRT5000', 10),
+     ('DHT11 e TCRT5000', 11),
+   ('DHT11 e TCRT5000', 12);
+   
+   select * from sistema_sensor;
+   
+   INSERT INTO leitura (dht11_temperatura, dht11_umidade, proximidade, fk_sistema_sensor)
+VALUES 
+  (25, 20.50, '0', 12);
    
    
 
