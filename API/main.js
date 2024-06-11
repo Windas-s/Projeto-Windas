@@ -29,11 +29,11 @@ const serial = async (
     .createPool({
       // altere!
       // Credenciais do banco de dados
-      host: "localhost",
-      user: "root",
-      password: "12345",
+      host: "127.0.0.1",
+      user: "aluno",
+      password: "sptech100",
       database: "windas",
-      port: 3306,
+      port: 3307,
     })
     .promise();
 

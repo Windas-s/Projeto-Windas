@@ -1,11 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
     <link rel="stylesheet" href="css/dashboard.css" />
-    <!-- <link rel="stylesheet" href="css/dash/visaoGeral.css" /> -->
+    <link rel="shortcut icon" href="img/logo widas.png" type="image/x-icon">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link
@@ -13,14 +13,12 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
       integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
       crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-
-    <script src="./js/kpiDash.js"></script>
+      referrerpolicy="no-referrer"/>
+    <script src="./js/sessao.js"></script>
   </head>
   <!-- validarSessao() -->
 
-  <body onload="chamarApi() , setTimeout(exibirQuartosDoUsuario, 2000)">
+  <body onload="chamarApi()">
     <div class="grid_container">
       <aside class="aside">
         <div class="usuario_container">
@@ -34,18 +32,47 @@
           </li>
         </ul>
         <ul id="ul_quartos"></ul>
+
+        <!-- <ul>
+          <li>
+            <img src="img/cama.svg" /><a
+              href="#"
+              style="color: #001d6c; font-weight: bold"
+              >Quarto N° 125</a
+            >
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <img src="img/cama.svg" /><a href="./pages/quarto126.html"
+              >Quarto N° 126</a
+            >
+          </li>
+        </ul> -->
+
+        <!-- <ul>
+          <li>
+            <img src="img/cama.svg" /><a href="./pages/quarto127.html"
+              >Quarto N° 127</a
+            >
+            <span class="alert-icon" style="padding-left: 30px; font-size: 35px"
+              >⚠️</span
+            >
+          </li>
+        </ul> -->
       </aside>
-      <!-- <header class="cabecalho">
+      <header class="cabecalho">
         <ul class="navbar">
           <li>Inicial</li>
           <li>Simulador</li>
+          <button onclick="obterDadosGrafico()">teste chamar dados</button>
         </ul>
         <img src="img/logo.svg" />
         <ul class="navbar">
           <li>Sobre nós</li>
           <li>Fale conosco</li>
         </ul>
-      </header> -->
+      </header>
 
       <div class="clima_tempo_container">
         <h1 id="cidade">São Paulo</h1>
@@ -94,19 +121,29 @@
         </div>
       </div>
 
-      <div
-        class="container_temperatura container bgColorTempQ125"
-        id="kpi-temperatura"
-      ></div>
+      <div class="container_temperatura container bgColorTempQ125">
+        <h3 class="titulo_container">Temperatura</h3>
+        <p class="paragrafo_container">23°C 🌡️</p>
+        <span id="status-message">Temperatura Normal</span>
+      </div>
 
-      <div
-        class="container_umidade container bgColorUmiQ125"
-        id="kpi-umidade"
-      ></div>
+      <div class="container_umidade container bgColorUmiQ125">
+        <h3 class="titulo_container">Umidade</h3>
+        <p class="paragrafo_container">45% 💧</p>
+        <span id="status-message">Umidade Normal</span>
+      </div>
 
-      <div class="container_proximidade container" id="kpi-proximidade"></div>
+      <div class="container_proximidade container">
+        <h3 class="titulo_container">Proximidade</h3>
+        <p class="paragrafo_container">Aberto 🪟</p>
+        <span id="status-message">Janela Aberta</span>
+      </div>
 
-      <div class="container_alerta container" id="kpi-alerta"></div>
+      <div class="container_alerta container">
+        <h3 class="titulo_container">Alerta ⚠️</h3>
+        <p class="paragrafo_container">Sem alertas</p>
+        <span id="status-message">-</span>
+      </div>
 
       <div id="graficos"></div>
 
@@ -133,7 +170,7 @@
     const apiKey = "910c4efbe73c746cce373fd23d6fdf43";
     const cidade = "São Paulo";
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(
-      cidade,
+      cidade
     )}&appid=${apiKey}&units=metric&lang=pt_br`;
     const results = await fetch(apiUrl);
     const json = await results.json();
@@ -153,8 +190,9 @@
   }
 
   function mostrarInfo(json) {
-    document.querySelector("#cidade").innerHTML =
-      `${json.cidade}, ${json.pais}`;
+    document.querySelector(
+      "#cidade"
+    ).innerHTML = `${json.cidade}, ${json.pais}`;
 
     document.querySelector("#temp_value").innerHTML = `${json.temp
       .toFixed(1)
@@ -168,7 +206,7 @@
     const apiKey = "910c4efbe73c746cce373fd23d6fdf43";
     const cidade = "São Paulo";
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(
-      cidade,
+      cidade
     )}&appid=${apiKey}&units=metric&lang=pt_br`;
     const results = await fetch(apiUrl);
     const json = await results.json();
@@ -200,7 +238,7 @@
       });
 
     return false;
-  }, 500000);
+  }, 200000);
 
   b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
@@ -275,88 +313,40 @@
 
   function exibirQuartosDoUsuario() {
     var quartos = JSON.parse(sessionStorage.quartos);
-    var ul_quartos = document.getElementById("ul_quartos");
-    ul_quartos.innerHTML = ""; 
-
     quartos.forEach((item) => {
-      fetch(`/medidas/ultimas/${item.idQuarto}`, { cache: "no-store" })
-        .then(function (response) {
-          if (response.ok) {
-            response.json().then(function (resposta) {
-              const ultimoDado = resposta[0];
-              const alerta = verificarAlertas(
-                ultimoDado.temperatura,
-                ultimoDado.umidade,
-              );
+      document.getElementById("ul_quartos").innerHTML += `
+        
+        <button 
+          class="btn_quarto" 
+          onclick="obterDadosGrafico(${item.idQuarto}, ${item.numero})"
+          id="ul_quartos${item.numero}">
+           ${item.numero}
+        </button>
+        
+      `;
 
-              ul_quartos.innerHTML += `
-                    <li class="btn_quarto" id='btn_quarto_${item.numero}' 
-                        onclick="obterDadosGrafico(${item.idQuarto}, ${item.numero})">
-                      <img src="img/cama.svg" />
-                      Quarto ${item.numero}
-                      ${alerta ? '<span class="alerta-li"><img src="img/alert.png" class="alerta-li"/></span>' : ""}
-                    </li>
-                  `;
-            });
-            
-          } else {
-            console.error("Nenhum dado encontrado ou erro na API");
-          }
-        })
-        .catch(function (error) {
-          console.error(
-            `Erro na obtenção dos dados p/ gráfico: ${error.message}`,
-          );
-        });
+      document.getElementById("grafico-temperatura").innerHTML += `
+            <div id="grafico${item.idQuarto}" class="display-none">
+                <div class="container_grafico-temperatura">
+                    <canvas id="graficoTemperatura${item.idQuarto}"></canvas>
+                </div>
+                <div class="container_grafico-umidade" 
+                    <canvas id="graficoUmidade${item.idQuarto}"></canvas>
+                </div>
+                <div class="label-captura">
+                    <p id="avisoCaptura${item.idQuarto}" style="color: white"></p>
+                </div>
+            </div>
+        `;
+
+      obterDadosGrafico(item.id);
     });
-
-    ul_quartos.innerHTML += `
-    <li class="btn-sair">
-            <img src="../img/cama.svg" /><a onclick="limparSessao()"
-              >Sair</a
-            >
-          </li>`;
-
-    // Selecionar o primeiro quarto por padrão
-    if (quartos.length > 0) {
-      setTimeout(() => {
-        obterDadosGrafico(quartos[0].idQuarto, quartos[0].numero);
-      }, 1000); 
-    }
-  }
-
-  function verificarAlertas(temperatura, umidade) {
-    const limitesTemperatura = {
-      idealBaixo: 23,
-      idealAlto: 25,
-    };
-
-    const limitesUmidade = {
-      idealBaixo: 30,
-      idealAlto: 60,
-    };
-
-    if (
-      temperatura < limitesTemperatura.idealBaixo ||
-      temperatura > limitesTemperatura.idealAlto
-    ) {
-      return true;
-    }
-
-    if (
-      umidade < limitesUmidade.idealBaixo ||
-      umidade > limitesUmidade.idealAlto
-    ) {
-      return true;
-    }
-
-    return false;
   }
 
   function alterarTitulo(idQuarto) {
     var tituloQuarto = document.getElementById(`tituloQuarto${idQuarto}`);
     var descricao = JSON.parse(sessionStorage.Quartos).find(
-      (item) => item.id == idQuarto,
+      (item) => item.id == idQuarto
     ).descricao;
     tituloQuarto.innerHTML =
       "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>" +
@@ -364,59 +354,30 @@
       "</span>";
   }
 
-  // Resto do código das funções de gráficos
+  // a partir daqui começam as funções dos gráficos
+
+  // O gráfico é construído com três funções:
+  // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
+  // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
+  // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
+
+  // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
+  // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
+  // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
+
+  //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+  //     Para ajustar o "select", ajuste o comando sql em src/models
 
   function obterDadosGrafico(idQuarto, numero) {
     console.log("idQuarto SELECIONADO: ", idQuarto);
 
-    document.getElementById("grafico-temperatura").innerHTML = `  
-    <canvas id="graficoTemperatura${idQuarto}"></canvas>
-  `;
-    document.getElementById("grafico-umidade").innerHTML = `  
-    <canvas id="graficoUmidade${idQuarto}"></canvas>
-  `;
+    // obterDadosGrafico(idQuarto)
 
-    document.getElementById("kpi-temperatura").innerHTML = `
-                    <div id="card_${idQuarto}">
-                      <h3 class="titulo_container">Temperatura</h3>
-                      <p class="paragrafo_container" id="temp_quarto_${idQuarto}"> <img src="img/load.gif" alt="" style='width: 120px'></p>
-                      <span id="descricao_quarto_${idQuarto}" class='span-kpi'></span>
-                    </div>
-    `;
+    // joao.paula@sptech.school - mandar zip do projeto
 
-    document.getElementById("kpi-umidade").innerHTML = `
-                    <div id="card_umidade_${idQuarto}">
-                      <h3 class="titulo_container">Umidade</h3>
-                      <p class="paragrafo_container" id="umid_quarto_${idQuarto}"> <img src="img/load.gif" alt="" style='width: 120px'></p>
-                      <span id="descricao_umidade_quarto_${idQuarto}" class='span-kpi'></span>
-                    </div>
-    `;
-
-    document.getElementById("kpi-proximidade").innerHTML = `
-                    <div id="card_proximidade_${idQuarto}">
-                      <h3 class="titulo_container">Janela</h3>
-                      <p class="paragrafo_container" id="prox_quarto_${idQuarto}"> <img src="img/load.gif" alt="" style='width: 120px'></p>
-                      <span id="descricao_proximidade_quarto_${idQuarto}" class='span-kpi'></span>
-                    </div>
-    `;
-
-    document.getElementById("kpi-alerta").innerHTML = `
-                    <div id="card_alerta_${idQuarto}">
-                      <h3 class="titulo_container">Alerta⚠️</h3>
-                      <p class="paragrafo_container-alerta" id="alerta_quarto_${idQuarto}"> <img src="img/load.gif" alt="" style='width: 120px'></p>
-                      <span id="descricao_alerta_quarto_${idQuarto}" class='span-kpi'></span>
-                    </div>
-
-    `;
-
-    // Adicionar a classe 'selected' ao item clicado
-    var btn_quarto = document.getElementById(`btn_quarto_${numero}`);
-    // Remover a classe 'selected' de todos os outros itens
-    document.querySelectorAll(".btn_quarto").forEach((item) => {
-      item.classList.remove("selected");
-    });
-    // Adicionar a classe 'selected' ao item clicado
-    btn_quarto.classList.add("selected");
+    // fetch -> passando idQuarto
+    // no then() -> tratar a resposta para gerar o gráfico
+    // caso já exista um gráfico, veja a função "atualizarGrafico()" que desmonta e remonta o gráfico
 
     fetch(`/medidas/ultimas/${idQuarto}`, { cache: "no-store" })
       .then(function (response) {
@@ -424,7 +385,8 @@
           response.json().then(function (resposta) {
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
             resposta.reverse();
-            plotarGraficos(resposta, idQuarto);
+
+            plotarGrafico(resposta, idQuarto);
           });
         } else {
           console.error("Nenhum dado encontrado ou erro na API");
@@ -432,179 +394,143 @@
       })
       .catch(function (error) {
         console.error(
-          `Erro na obtenção dos dados p/ gráfico: ${error.message}`,
+          `Erro na obtenção dos dados p/ gráfico: ${error.message}`
         );
       });
   }
 
-  function plotarGraficos(resposta, idQuarto) {
-    console.log("iniciando plotagem dos gráficos...");
+  function plotarGrafico(resposta, idQuarto) {
+    console.log("iniciando plotagem do gráfico...");
 
     // Criando estrutura para plotar gráfico - labels
     let labels = [];
-    let dadosTemperatura = [];
-    let dadosUmidade = [];
+
+    // Criando estrutura para plotar gráfico - dados
+    let dados = {
+      labels: labels,
+      datasets: [
+        {
+          label: "Umidade",
+          data: [],
+          fill: false,
+          borderColor: "rgb(75, 192, 192)",
+          tension: 0.1,
+        },
+        {
+          label: "Temperatura",
+          data: [],
+          fill: false,
+          borderColor: "rgb(199, 52, 52)",
+          tension: 0.1,
+        },
+      ],
+    };
 
     console.log("----------------------------------------------");
     console.log(
-      'Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGraficos":',
+      'Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":'
     );
     console.log(resposta);
 
-    // Inserindo valores recebidos em estrutura para plotar os gráficos
-    for (let i = 0; i < resposta.length; i++) {
+    // Inserindo valores recebidos em estrutura para plotar o gráfico
+    for (i = 0; i < resposta.length; i++) {
       var registro = resposta[i];
       labels.push(registro.momento_grafico);
-      dadosTemperatura.push(registro.temperatura);
-      dadosUmidade.push(registro.umidade);
+      dados.datasets[0].data.push(registro.umidade);
+      dados.datasets[1].data.push(registro.temperatura);
+      //dados.datasets[2].data.push(registro.proximidade);
     }
 
     console.log("----------------------------------------------");
-    console.log("Os gráficos serão plotados com os respectivos valores:");
+    console.log("O gráfico será plotado com os respectivos valores:");
     console.log("Labels:");
     console.log(labels);
-    console.log("Dados de Temperatura:");
-    console.log(dadosTemperatura);
-    console.log("Dados de Umidade:");
-    console.log(dadosUmidade);
+    console.log("Dados:");
+    console.log(dados.datasets);
     console.log("----------------------------------------------");
 
-    // Criando estrutura para plotar gráfico de temperatura
-    const configTemperatura = {
+    // Criando estrutura para plotar gráfico - config
+    const config = {
       type: "line",
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            label: "Temperatura",
-            data: dadosTemperatura,
-            fill: false,
-            borderColor: "rgba(199, 52, 52)",
-            backgroundColor: "rgba(199, 52, 52)",
-            tension: 0.1,
-          },
-        ],
-      },
+      data: dados,
     };
 
-    // Criando estrutura para plotar gráfico de umidade
-    const configUmidade = {
-      type: "line",
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            label: "Umidade",
-            data: dadosUmidade,
-            fill: false,
-            borderColor: "rgb(75, 192, 192)",
-            backgroundColor: "rgb(75, 192, 192)",
-            tension: 0.1,
-          },
-        ],
-      },
-    };
-
-    // Adicionando gráficos criados em divs na tela
-    let myChartTemperatura = new Chart(
+    // Adicionando gráfico criado em div na tela
+    let myChart = new Chart(
       document.getElementById(`graficoTemperatura${idQuarto}`),
-      configTemperatura,
+      config
     );
 
-    let myChartUmidade = new Chart(
-      document.getElementById(`graficoUmidade${idQuarto}`),
-      configUmidade,
-    );
-
-    setTimeout(
-      () =>
-        atualizarGraficos(
-          idQuarto,
-          labels,
-          dadosTemperatura,
-          dadosUmidade,
-          myChartTemperatura,
-          myChartUmidade,
-        ),
-      2000,
-    );
+    setTimeout(() => atualizarGrafico(idQuarto, dados, myChart), 2000);
   }
 
-  function atualizarGraficos(
-    idQuarto,
-    labels,
-    dadosTemperatura,
-    dadosUmidade,
-    myChartTemperatura,
-    myChartUmidade,
-  ) {
+  function atualizarGrafico(idQuarto, dados, myChart) {
     fetch(`/medidas/tempo-real/${idQuarto}`, { cache: "no-store" })
       .then(function (response) {
         if (response.ok) {
           response.json().then(function (novoRegistro) {
             obterdados(idQuarto);
+            // alertar(novoRegistro, idAquario);
             console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-            console.log(`Dados atuais dos gráficos:`);
-            console.log(labels, dadosTemperatura, dadosUmidade);
+            console.log(`Dados atuais do gráfico:`);
+            console.log(dados);
 
             let avisoCaptura = document.getElementById(
-              `avisoCaptura${idQuarto}`,
+              `avisoCaptura${idQuarto}`
             );
             avisoCaptura.innerHTML = "";
 
-            if (novoRegistro[0].momento_grafico == labels[labels.length - 1]) {
+            if (
+              novoRegistro[0].momento_grafico ==
+              dados.labels[dados.labels.length - 1]
+            ) {
               console.log(
-                "Como não há dados novos para captura, os gráficos não atualizarão.",
+                "---------------------------------------------------------------"
+              );
+              console.log(
+                "Como não há dados novos para captura, o gráfico não atualizará."
               );
               avisoCaptura.innerHTML =
-                "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, os gráficos não atualizarão.";
+                "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará.";
+              console.log("Horário do novo dado capturado:");
+              console.log(novoRegistro[0].momento_grafico);
+              console.log("Horário do último dado capturado:");
+              console.log(dados.labels[dados.labels.length - 1]);
+              console.log(
+                "---------------------------------------------------------------"
+              );
             } else {
-              // tirando e colocando valores nos gráficos
-              labels.shift(); // apagar o primeiro
-              labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
+              // tirando e colocando valores no gráfico
+              dados.labels.shift(); // apagar o primeiro
+              dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
 
-              dadosTemperatura.shift(); // apagar o primeiro de temperatura
-              dadosTemperatura.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
+              dados.datasets[0].data.shift(); // apagar o primeiro de umidade
+              dados.datasets[0].data.push(novoRegistro[0].umidade); // incluir uma nova medida de umidade
 
-              dadosUmidade.shift(); // apagar o primeiro de umidade
-              dadosUmidade.push(novoRegistro[0].umidade); // incluir uma nova medida de umidade
+              dados.datasets[1].data.shift(); // apagar o primeiro de temperatura
+              dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
 
-              myChartTemperatura.update();
-              myChartUmidade.update();
+              myChart.update();
             }
 
+            // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
             proximaAtualizacao = setTimeout(
-              () =>
-                atualizarGraficos(
-                  idQuarto,
-                  labels,
-                  dadosTemperatura,
-                  dadosUmidade,
-                  myChartTemperatura,
-                  myChartUmidade,
-                ),
-              2000,
+              () => atualizarGrafico(idQuarto, dados, myChart),
+              2000
             );
           });
         } else {
           console.error("Nenhum dado encontrado ou erro na API");
+          // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
           proximaAtualizacao = setTimeout(
-            () =>
-              atualizarGraficos(
-                idQuarto,
-                labels,
-                dadosTemperatura,
-                dadosUmidade,
-                myChartTemperatura,
-                myChartUmidade,
-              ),
-            2000,
+            () => atualizarGrafico(idQuarto, dados, myChart),
+            2000
           );
         }
       })
       .catch(function (error) {
         console.error(
-          `Erro na obtenção dos dados p/ gráfico: ${error.message}`,
+          `Erro na obtenção dos dados p/ gráfico: ${error.message}`
         );
       });
   }

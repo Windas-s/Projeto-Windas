@@ -30,16 +30,18 @@ a {
 /* Grid */
 .grid_container {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(5, 1fr) auto;
+  grid-template-rows: 80px 100px 80px repeat(3, 1fr) auto;
   grid-column-gap: 16px;
 
   width: 100%;
+
 }
 
 /* Container padrão */
 .container {
   border-radius: 10px;
+  height: 300px;
 
   display: flex;
   flex-direction: column;
@@ -49,12 +51,11 @@ a {
 
 /* Barra de navegação lateral */
 .aside {
-  grid-area: 1 / 1 / 7 / 2;
+  grid-area: 2 / 1 / 7 / 2;
   background-color: var(--azul-primario);
   box-shadow: 6px 16px 51px -33px rgba(0, 0, 0, 0.75);
   overflow: auto;
   top: 0;
-  height: 100vh;
 }
 
 .aside::-webkit-scrollbar {
@@ -105,21 +106,6 @@ a {
   padding: 0;
 }
 
-.aside li {
-  margin-bottom: 20px;
-  background-color: var(--cinza-basico);
-
-  width: 85%;
-  height: 50px;
-  border-top-right-radius: 40px;
-  border-bottom-right-radius: 40px;
-
-  display: flex;
-  align-items: center;
-
-  box-shadow: 6px 16px 29px -19px rgba(0, 0, 0, 0.37);
-}
-
 .aside button {
   margin-bottom: 20px;
   background-color: var(--cinza-basico);
@@ -146,6 +132,20 @@ a {
 }
 
 /* Cabeçalho */
+.cabecalho {
+  grid-area: 1 / 1 / 2 / 6;
+
+  margin-right: 10px;
+
+  column-gap: 0px;
+  padding: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  border-bottom: 1px solid var(--cinza-basico);
+}
 
 /* Navegação */
 .navbar {
@@ -180,35 +180,19 @@ a {
 /*-----------------API CLIMA TEMPO-------------------*/
 
 .clima_tempo_container {
-  grid-area: 1/2/2/7;
+  grid-area: 2/2/3/7;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 12px;
-}
-
-.container_metricas {
-  grid-area: 2/2/4/6;
-  padding-left: 40px;
-  padding-right: 50px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-
-  width: 100%;
 }
 
 .infos {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 
-  width: 40%;
-  margin-top: 5px;
+  width: 20%;
 }
 
 #temp_icon {
@@ -218,6 +202,7 @@ a {
 #umid_icon {
   color: rgb(0, 250, 246);
 }
+
 
 /* KPI's */
 .container_temperatura {
@@ -238,7 +223,7 @@ a {
 }
 
 .titulos_metricas {
-  grid-area: 2 / 2 / 3 / 6;
+  grid-area: 3 / 2 / 4 / 6;
 
   display: flex;
   justify-content: center;
@@ -255,7 +240,19 @@ a {
   padding-left: 20px;
 }
 
+.container_metricas {
+  grid-area: 3/2/4/6;
+  padding-left: 40px;
+  padding-right: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 
+  width: 100%;
+}
 
 .container-metricas-temperaturas {
   display: flex;
@@ -290,7 +287,7 @@ a {
 }
 
 #alerta_temperatura_ideal {
-  background-color: #9ccc65;
+  background-color: #9CCC65;
   width: 50%;
   height: 60%;
   display: flex;
@@ -299,7 +296,7 @@ a {
 }
 
 #alerta_temperatura_alta {
-  background-color: #ff7043;
+  background-color: #FF7043;
   width: 50%;
   height: 60%;
   margin-right: 40px;
@@ -309,8 +306,8 @@ a {
   border-radius: 0 4px 4px 0;
 }
 
-#alerta_umidade_baixa {
-  background-color: #a1b9cc;
+#alerta_umidade_baixa{
+  background-color: #A1B9CC;
   width: 50%;
   height: 60%;
   display: flex;
@@ -320,15 +317,15 @@ a {
 }
 
 #alerta_umidade_ideal {
-  background-color: #9ccc65;
-  width: 50%;
-  height: 60%;
-  display: flex;
+background-color: #9CCC65;
+width: 50%;
+height: 60%;
+display: flex;
   align-items: center;
   justify-content: center;
 }
 
-#alerta_umidade_alta {
+#alerta_umidade_alta{
   background-color: rgb(255, 0, 0);
   width: 50%;
   height: 60%;
@@ -338,53 +335,21 @@ a {
   border-radius: 0 4px 4px 0;
 }
 
-/* medidas de temperatura */
-
-.temperatura-quente {
-  background-color: #ff7043;
+.temperatura-quente{
+  background-color: #FF7043;
 }
 
-.temperatura-ideal {
-  background-color: #9ccc65;
+.temperatura-ideal{
+  background-color: #9CCC65;
 }
 
-.temperatura-baixa {
+.temperatura-baixa{
   background-color: #3fbbec;
 }
 
-/* medidas de umidade */
 
-.umidade-abaixo{
-  background-color: #a1b9cc;
-}
-
-.umidade-ideal{
-  background-color: #9ccc65;
-}
-
-.umidade-alta{
-  background-color: #FF0000;
-}
-
-/* medida proximidade */
-
-.janela-aberta{
-  background-color: #2182bf;
-}
-
-.janela-fechada{
-    background-color: #888888;
-}
-
-/* alerta */
-
-.alerta{
-  background-color: #ffcd07ff;
-}
-
-
-.container_alerta > p,
-.container_proximidade > p {
+.container_alerta>p,
+.container_proximidade>p {
   font-size: 25px;
 }
 
@@ -406,10 +371,6 @@ a {
   font-size: 48px;
 
   padding: 20px;
-}
-
-.span-kpi{
-  font-weight: bold;
 }
 
 /* Graficos de temperatura e umidade */
@@ -447,45 +408,12 @@ a {
   padding: 16px;
   box-shadow: 6px 16px 29px -22px rgba(0, 0, 0, 0.23);
   height: 200px;
+  width: 300px;
 }
+
 
 .btn_quarto {
-  color: var(--azul-primario);
+  color: blue; 
+  background-color: red;
   width: 100%;
-
-  cursor: pointer;
-  transition: color 0.5s ease;
 }
-
-.selected {
-  color: #001d6c;
-  font-weight: bold;
-}
-
-.btn-sair{
-  cursor: pointer;
-}
-
-.btn-sair > a:hover{
-  color: red;
-}
-
-.paragrafo_container-alerta{
-  font-family: Arial, sans-serif;
-  font-size: 28px;
-  font-weight: bold;
-
-  padding: 20px;
-}
-
-.alerta-li{
-  padding-left: 10px;
-  width: 40px;
-  text-align: center;
-}
-
-#clima_tempo_temperatura, #clima_tempo_umidade{
-  display: flex;
-  width: 200px;
-}
-
