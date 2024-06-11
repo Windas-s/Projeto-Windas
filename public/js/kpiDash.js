@@ -58,6 +58,7 @@ function validarSessao() {
       classe_temperatura = "temperatura-ideal container card";
       document.getElementById(`descricao_quarto_${idQuarto}`).innerHTML =
         "Temperatura ideal🌡️";
+        
     } else if (temp > limitesTemperatura.quente) {
       classe_temperatura = "temperatura-quente container card";
       document.getElementById(`descricao_quarto_${idQuarto}`).innerHTML =
@@ -155,7 +156,7 @@ function validarSessao() {
     JSON.parse(sessionStorage.quartos).forEach((item) => {
       obterdados(item.idQuarto);
     });
-    setTimeout(atualizacaoPeriodica, 5000);
+    setTimeout(atualizacaoPeriodica, 10000);
   }
   
   function obterdados(idQuarto) {

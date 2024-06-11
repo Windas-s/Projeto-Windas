@@ -280,7 +280,7 @@
     ul_quartos.innerHTML = ""; 
 
     quartos.forEach((item) => {
-      fetch(`/medidas/ultimas/${item.idQuarto}`, { cache: "no-store" })
+      fetch(`/medidas/tempo-real/${item.idQuarto}`, { cache: "no-store" })
         .then(function (response) {
           if (response.ok) {
             response.json().then(function (resposta) {
