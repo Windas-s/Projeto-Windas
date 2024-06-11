@@ -1,83 +1,17 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-    margin: 0;
-    padding: 0;
-    background-color: #fff;
-    text-align: center;
 
-    display: flex;
-    flex-direction: row;
-
-    font-family: "Montserrat", sans-serif;
-
+* {
+    color: #000;
 }
+
+body {
+    font-family: "Montserrat", sans-serif;
+}
+
 
 /*-----------------------LOGIN--------------------------*/
-
-.headerLogin {
-
-    position: absolute;
-    /* border-bottom: .0313rem solid #979997; */
-    background-color: transparent;
-    opacity: 0.7;
-
-    padding-top: .3125rem;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-
-    width: 50vw;
-
-}
-
-.headerCadastro {
-
-    position: absolute;
-    /* border-bottom: .0313rem solid #979997; */
-    background-color: transparent;
-    opacity: 0.7;
-    row-gap: 3.125rem ;
-
-    padding-top: .3125rem;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-
-    width: 100%;
-
-}
-
-.navbar {
-
-    display: flex;
-    list-style: none;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-
-    width: 80%;
-}
-
-.headerLogin img {
-
-    height: 3.75rem;
-    width: 3.75rem;
- 
-}
-
-.headerCadastro img {
-
-    padding-right: .3125rem;
-
-    height: 3.75rem;
-    width: 3.75rem;
-    
-}
-
 .cadastroSucesso {
-
     position: absolute;
     background-color: #2694BF;
     color: white;
@@ -86,28 +20,21 @@ body {
     left: 23%;
     top: 1.25rem;
     border-radius: 2.8125rem;
-
     text-align: center;
-
     display: none;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-
 }
 
 .cadastroSucesso p {
-
     font-size: 20pt;
     font-weight: 600;
-
 }
 
 .cadastroSucesso span {
-
     font-size: 14pt;
     font-weight: 500;
-
 }
 
 a {
@@ -118,51 +45,43 @@ a {
 }
 
 a:hover {
-    color: black;
+    color: rgb(13, 89, 161);
     transform: scale(1.1);
-
 }
 
 .container_login {
-
     display: none;
-
 }
 
 .login {
-
     height: 100vh;
     width: 50vw;
     text-align: center;
     display: flex;
     justify-content: center;
-    align-items: center;
     background-color: #fff;
     flex-direction: column;
-
+    padding: 0 10% 0;
 }
 
 h1 {
-
+    margin-bottom: 4%;
     font-weight: 700;
     font-style: normal;
     color: #31BBD8;
-
 }
 
 input {
-
     height: 3.125rem;
     width: 27.5rem;
     border: none;
     background-color: #ECECEC;
-    border-radius: 1.25rem;
+    border-radius: .875rem;
     outline: none;
-    
+    margin: 0 0 2.5rem 0;
 }
 
 #input_nome {
-
     background-image: url("../img/solar_user-outline.png");
     background-repeat: no-repeat;
     background-size: 1.5625rem;
@@ -172,17 +91,14 @@ input {
 }
 
 #login_input_email {
-
     background-image: url("../img/iconamoon_email-thin.png");
     background-repeat: no-repeat;
     background-size: 1.5625rem;
     background-position: .625rem center;
     text-indent: 2.5rem;
-
 }
 
 #login_input_senha{
-
     background-image: url("../img/Vector.png");
     background-repeat: no-repeat;
     background-size: 1.1875rem;
@@ -192,13 +108,11 @@ input {
 }
 
 #cadastro_input_email {
-
     background-image: url("../img/iconamoon_email-thin.png");
     background-repeat: no-repeat;
     background-size: 1.5625rem;
     background-position: .625rem center;
     text-indent: 2.5rem;
-
 }
 
 #cadastro_input_senha{
@@ -207,43 +121,44 @@ input {
     background-size: 1.1875rem;
     background-position: .625rem center;
     text-indent: 2.5rem;
-
 }
 
 #confirmacaoSenha{
-
     background-image: url("../img/Vector.png");
     background-repeat: no-repeat;
     background-size: 1.1875rem;
     background-position: .625rem center;
     text-indent: 2.5rem;
-
 }
 
-.mensagemErro {
-    
+.mensagemErro {    
     display: flex;
     justify-content: start;
     position: absolute;
     left: 25%;
     padding-left: 1.875rem;
     width: 28.75rem;
-
     text-align: left;
     font-size: 10pt;
-
+    margin-top: -2.25rem;
     color: red;
-
 }
 
 #imagem_cama {
-
     width: 50vw;
     height: 100vh;
     position: absolute;
     left: -.375rem;
     z-index: 1;
+}
 
+#imagem_cama1 {
+    width: 50vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    left: -.375rem;
+    z-index: 1;
 }
 
 .divBranca {
@@ -255,16 +170,13 @@ input {
 }
 
 .divBranca img {
-
     position: relative;
     top: 25%;
     width: 50%;
     height: 40%;
-
 }
 
 .login-button {
-
     width: 13.6875rem;
     height: 3.125rem;
     border: none;
@@ -275,45 +187,43 @@ input {
     color: #fff;
     box-shadow: .25rem .25rem 0rem #ECECEC;
     cursor: pointer;
-
 }
 
 .nao_tem_conta {
-
-    display: flex;
+    display: flex; 
+    align-items: center;
     justify-content: center;
-    row-gap: .4375rem;
-
 }
 
-h5 {
-
+.nao_tem_conta h5 {
+    margin: 0;
     font-weight: 700;
     font-style: normal;
-    color: #9797;
+    color: rgba(68, 66, 66, 0.568);
     text-align: center;
-
 }
 
-#nao_tem_conta_button{
-
-    width: 3.125rem;
-    height: 3.125rem;
-    border: none;
-    background-color: transparent;
-    font-weight: bold;
-    color: #2694BF;
-
+#nao_tem_conta_button {
+    padding: 0; 
+    margin-left: 0.75rem;
+    border: none; 
+    cursor: pointer; 
+    text-decoration: none;   
     position: relative;
-    top: .3125rem;
-    cursor: pointer;
+    display: inline-block; 
+    background-color: transparent;
+    border: none;
+    font-weight: 800;
+    position: relative;
+}
 
+a {
+    font-size: .875rem;
+    color: #1e8bb6;
 }
 
 /*--------------------------CADASTRO----------------------------- */
-
 .container_cadastro {
-
     display: flex;
     position: absolute;
     left: 50%;
@@ -321,7 +231,6 @@ h5 {
 }
 
 #cadastro_inputs {
-
     height: 43.75rem;
     width: 62.5rem;
     text-align: center;
@@ -330,19 +239,9 @@ h5 {
     align-items: center;
     background-color: #fff;
     flex-direction: column;
-
-}
-
-.tem_conta {
-
-        display: flex;
-        justify-content: center;
-        row-gap: .4375rem;
-
 }
 
 #cadastro-button  {
-
     width: 13.6875rem;
     height: 3.125rem;
     border: none;
@@ -354,25 +253,52 @@ h5 {
     font-family: "Roboto", sans-serif;
     box-shadow: .25rem .25rem 0rem #ECECEC;
     cursor: pointer;
-
 }
 
-#tem_conta_button {
+.hotel {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: .25rem;
+    margin-left: 6rem;
+    font-size: .975rem;
+    color: #686868;
+    font-weight: 600;
+}
 
-    width: 3.125rem;
+select {
     height: 3.125rem;
+    width: 27.5rem;
     border: none;
-    background-color: transparent;
-    font-weight: bold;
-    color: #2694BF;
+    background: #ECECEC;
+    border-radius: .875rem;
+    outline: none;
+    appearance: none;
+    color: #686868; 
+    margin: 0 0 2.5rem 0; 
+    font-size: 14px;
+    font-weight: 500;
+}      
 
-    position: relative;
-    top: .3125rem;
-    cursor: pointer;
 
+#selecao {
+    text-align: center;
+    font-weight: 700;
+    color: #127ca7;
+}   
+
+option {
+    border: none;
+    appearance: none;
+    border-radius: .875rem;
+    outline: none;
+    color: #686868;  
+    text-align: center;
 }
+
 
 @keyframes imgAnim {
+
     0% {
         left: 50%;
     }
@@ -382,6 +308,7 @@ h5 {
 }
 
 @keyframes imgAnim2 {
+
     0% {
         left: -0.375rem;
     }
@@ -391,6 +318,7 @@ h5 {
 }
 
 @keyframes fadeOut {
+
     0% {
         opacity: 100%;
     }

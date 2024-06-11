@@ -262,7 +262,6 @@ button.button-login:hover {
     opacity: 1;   
 }
 
-
 .nossa-equipe {
     display: flex;
     flex-direction: row;
@@ -273,10 +272,6 @@ button.button-login:hover {
     background-color: var(--cinza-basico);
     overflow-x: auto;
 }
-
-/* .nossa-equipe::-webkit-scrollbar{
-    display: none;
-} */
 
 .nossa-equipe h1 {
     display: flex;

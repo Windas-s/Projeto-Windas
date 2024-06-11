@@ -1,114 +1,95 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="shortcut icon" href="img/logo widas.png" type="image/x-icon">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-    rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/login.css" />
 
-  <link rel="stylesheet" href="css/login.css" />
+    <title>Winda's</title>
+  </head>
 
-  <title>Winda's</title>
-</head>
+  <body onload="listar()">
 
-<body onload="listar()">
-  <img src="img/hotelLogin.jpg" id="imagem_cama" />
-
-  <!-- <div class="divBranca" id="divBranca">
-
-        <img src="img/logo_azul_windas_sem_fundo.png" alt="">
-
-    </div> -->
-
-  <div class="container_cadastro" id="container_cadastro">
-    <div class="headerCadastro">
-      <ul class="navbar">
-        <a href="index.html">
-          <li>Inicial</li>
-        </a>
-        <a href="index.html">
-          <li>Simulador</li>
-        </a>
-
-        <a href="index.html">
-          <li>Sobre nós</li>
-        </a>
-        <a href="index.html">
-          <li>Fale conosco</li>
-        </a>
-      </ul>
-
-      <a href="">
-        <img id="logo" src="img/logo_azul_windas_sem_fundo.png" />
-      </a>
-    </div>
-
-    <div class="cadastroSucesso" id="cadastroSucesso">
-      <p>Cadastro realizado com sucesso!</p>
-      <span>Faça login para continuar</span>
-    </div>
-
-    <div class="login">
-      <h1>Criar conta</h1>
-
-      <div class="inputs">
-        <span>Hotel:</span>
-        <select name="hotels" id="listaHotels">
-          <option selected>Selecione um hotel</option>
-        </select>
-        <br />
-        <input placeholder="Nome" id="input_nome" />
-        <br />
-        <span id="nomeErro" class="mensagemErro"></span>
-        <br />
-        <br />
-        <br />
-
-        <input placeholder="Email" id="cadastro_input_email" />
-        <br />
-        <span id="cadastroEmailErro" class="mensagemErro"></span>
-        <br />
-        <br />
-        <br />
-
-        <input placeholder="Senha" id="cadastro_input_senha" />
-        <br />
-        <span id="cadastroSenhaErro" class="mensagemErro"></span>
-        <br />
-        <br />
-        <br />
-
-        <input placeholder="Confirmação de senha" id="confirmacaoSenha" />
-        <br />
-        <span id="cadastroConfirmSenhaErro" class="mensagemErro"></span>
-        <br />
-        <br />
-        <br />
-
-        <button id="cadastro-button" onclick="cadastrar()">
-          Cadastre-se
-        </button>
-        <br />
-
-        <h5 id="h5_cadastro"></h5>
-
-        <div class="tem_conta">
-          <h5 id="temConta">Tem uma conta?</h5>
-
-          <button id="tem_conta_button">
-            <a href="login.html"> Entre </a>
-          </button>
+    <h1>Criar conta</h1>
+    <div class="header">
+      <div class="container">
+        <a href="index.html"> <img src="img/logo_windas.svg" /></a>
+        <ul class="navbar">
+          <a href="index.html">
+            <li>Inicial</li>
+          </a>
+          <a href="index.html">
+            <li>Sobre nós</li>
+          </a>
+          <a href="index.html">
+            <li>Simulador</li>
+          </a>
+          <a href="index.html">
+            <li>Fale conosco</li>
+          </a>
+        </ul>
+        <div class="header-button">
         </div>
       </div>
     </div>
-  </div>
-</body>
 
+    <img src="img/hotelLogin.jpg" id="imagem_cama1"/>
+
+    <div class="container_cadastro" id="container_cadastro">
+
+      <div class="cadastroSucesso" id="cadastroSucesso">
+        <p>Cadastro realizado com sucesso!</p>
+        <span>Faça login para continuar</span>
+      </div>
+
+      <div class="login">
+        <h1>Criar conta</h1>
+
+        <div class="inputs">
+          <span class="hotel">Hotel:</span>
+          <select name="hotels" id="listaHotels">
+            <option disabled selected id="selecao">Selecione um hotel</option>
+            <option value="">ssss</option>
+          </select>
+          
+          <input placeholder="Nome" id="input_nome" />
+            <span id="nomeErro" class="mensagemErro"></span>
+
+          <input placeholder="Email" id="cadastro_input_email" type="email"/>
+            <span id="cadastroEmailErro" class="mensagemErro"></span>
+
+          <input placeholder="Senha" id="cadastro_input_senha" type="password"/>
+            <span id="cadastroSenhaErro" class="mensagemErro"></span>
+
+          <input placeholder="Confirmação de senha" id="confirmacaoSenha" type="password"/>
+            <span id="cadastroConfirmSenhaErro" class="mensagemErro"></span>
+
+          <button id="cadastro-button" onclick="cadastrar()">
+            Cadastre-se
+          </button>
+
+          <h5 id="h5_cadastro"></h5>
+
+          <div class="nao_tem_conta">
+            <h5 id="temConta">Tem uma conta?</h5>
+
+            <button id="nao_tem_conta_button">
+              <a href="login.html"> Entre </a>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
 
 <script src="js/login.js"></script>
@@ -134,7 +115,7 @@
     let emailValido = false;
 
     // criando variáveis de mensagens
-    let mensagemErroNome = "O nome deve conter pelo três um caracteres.";
+    let mensagemErroNome = "O nome deve conter pelo menos três caracteres.";
 
     let mensagemEmailInvalido = "Insira um email válido. Ex: windas@gmail.com";
 
@@ -244,7 +225,7 @@
       setTimeout(
         () =>
           (document.getElementById("cadastroSucesso").style.display = "none"),
-        4900,
+        4900
       );
 
       // Enviando o valor da nova input
