@@ -20,7 +20,7 @@
   </head>
   <!-- validarSessao() -->
 
-  <body onload="chamarApi(), preencherSelectAndares(), setTimeout(exibirQuartosDoUsuario, 2000)">
+  <body onload="chamarApi(), preencherSelectAndares(), setTimeout(exibirQuartosDoUsuario, 1000), obterDadosGrafico()">
     <div class="grid_container">
       <aside class="aside">
         <div class="usuario_container">
@@ -40,17 +40,6 @@
         </li>
         <ul id="ul_quartos"></ul>
       </aside>
-      <!-- <header class="cabecalho">
-        <ul class="navbar">
-          <li>Inicial</li>
-          <li>Simulador</li>
-        </ul>
-        <img src="img/logo.svg" />
-        <ul class="navbar">
-          <li>Sobre nós</li>
-          <li>Fale conosco</li>
-        </ul>
-      </header> -->
 
       <div class="clima_tempo_container">
         <h1 id="cidade">São Paulo</h1>
@@ -70,8 +59,9 @@
       </div>
 
       <div class="titulos_metricas">
-        <span id="temperatura">Temperatura</span>
-        <span id="umidade">Umidade</span>
+        <span id="temperatura">Metricas de Temperatura</span>
+        <spa id="umidade">Metricas de Umidade</spa
+          n>
       </div>
       <div class="container_metricas">
         <div class="container-metricas-temperaturas">
@@ -159,7 +149,10 @@
 
   function mostrarInfo(json) {
     document.querySelector("#cidade").innerHTML =
-      `${json.cidade}, ${json.pais}`;
+      `${json.cidade}`;
+
+      document.querySelector("#cidade").innerHTML +=
+      `- clima externo`;
 
     document.querySelector("#temp_value").innerHTML = `${json.temp
       .toFixed(1)
@@ -241,22 +234,11 @@
         .then(function (response) {
           if (response.ok) {
             response.json().then(function (resposta) {
-              const ultimoDado = resposta[0];
-              const alerta = verificarAlertas(
-                ultimoDado.temperatura,
-                ultimoDado.umidade,
-              );
-
               ul_quartos.innerHTML += `
                     <li class="btn_quarto" id='btn_quarto_${item.numero}' 
                         onclick="obterDadosGrafico(${item.idQuarto}, ${item.numero})">
                       <img src="img/cama.svg" />
                       Quarto ${item.numero}
-                      ${
-                        alerta
-                          ? '<span class="alerta-li"><img src="img/alert.png" class="alerta-li"/></span>'
-                          : ""
-                      }
                     </li>
                   `;
             });
