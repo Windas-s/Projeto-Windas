@@ -47,13 +47,13 @@ function alertar(resposta, idQuarto) {
 
   /* Verificação temperatura */
 
-  if (temp <= 23.5) {
+  if (temp <= 20.5) {
     classe_temperatura = "temperatura-baixa container card";
     document.getElementById(`descricao_quarto_${idQuarto}`).innerHTML =
       "Temperatura baixa🌡️";
   } else if (
     temp <= 25 &&
-    temp >= 23.5
+    temp > 20.5
   ) {
     classe_temperatura = "temperatura-ideal container card";
     document.getElementById(`descricao_quarto_${idQuarto}`).innerHTML =
@@ -112,16 +112,16 @@ function alertar(resposta, idQuarto) {
       "Sem alertas";
     document.getElementById(`descricao_alerta_quarto_${idQuarto}`).innerHTML =
       "Condições adequadas ✅";
-  } else if (tempFora >= 26 && temp <= 23 && prox == 0) {
+  } else if (tempFora >= 26 && temp <= 20 && prox == 0) {
     classe_alerta = "alerta container card";
     document.getElementById(`alerta_quarto_${idQuarto}`).innerHTML =
-      "Fechar janela e ligar ar-condicionado";
+      "Fechar janela e desligar ar-condicionado";
     document.getElementById(`descricao_alerta_quarto_${idQuarto}`).innerHTML =
       "Condições inadequadas 🚨";
-  } else if (tempFora >= 26 && temp <= 23 && prox == 1) {
+  } else if (tempFora >= 26 && temp <= 20 && prox == 1) {
     classe_alerta = "alerta container card";
     document.getElementById(`alerta_quarto_${idQuarto}`).innerHTML =
-      "Manter janela fechada e desligar ar-condicionado";
+      "Abrir janela ou desligar ar-condicionado";
     document.getElementById(`descricao_alerta_quarto_${idQuarto}`).innerHTML =
       "Condições inadequadas 🚨";
   } else if (tempFora >= 26 && temp >= 26 && prox == 0) {
@@ -133,33 +133,41 @@ function alertar(resposta, idQuarto) {
   } else if (tempFora >= 26 && temp >= 26 && prox == 1) {
     classe_alerta = "alerta container card";
     document.getElementById(`alerta_quarto_${idQuarto}`).innerHTML =
-      "Fechar janela e ligar ar-condicionado";
+      "Manter janela fechada e ligar ar-condicionado";
     document.getElementById(`descricao_alerta_quarto_${idQuarto}`).innerHTML =
       "Condições inadequadas 🚨";
-  } else if (tempFora <= 23 && temp >= 23 && prox == 0) {
+  } else if (tempFora <= 20 && temp >= 26 && prox == 0) {
     classe_alerta = "alerta container card";
     document.getElementById(`alerta_quarto_${idQuarto}`).innerHTML =
-      "Fechar janela e desligar ar-condicionado";
+      "Manter janela aberta e evitar ligar o ar-condicionad";
     document.getElementById(`descricao_alerta_quarto_${idQuarto}`).innerHTML =
       "Condições inadequadas 🚨";
-  } else if (tempFora <= 23 && temp >= 23 && prox == 1) {
+  } else if (tempFora <= 20 && temp >= 26 && prox == 1) {
     classe_alerta = "alerta container card";
     document.getElementById(`alerta_quarto_${idQuarto}`).innerHTML =
-      "Ligar ar condionado ou abrir janela";
+      "Abrir janela e evitar ligar o ar-condicionado";
     document.getElementById(`descricao_alerta_quarto_${idQuarto}`).innerHTML =
       "Condições inadequadas 🚨";
-  } else if (tempFora <= 23 && temp <= 23 && prox == 0) {
+  } else if (tempFora <= 20 && temp <= 20 && prox == 0) {
     classe_alerta = "alerta container card";
     document.getElementById(`alerta_quarto_${idQuarto}`).innerHTML =
       "Fechar janela e desligar ar-condicionado (caso ligado)";
     document.getElementById(`descricao_alerta_quarto_${idQuarto}`).innerHTML =
       "Condições inadequadas 🚨";
-  } else if (tempFora <= 23 && temp <= 23 && prox == 1) {
+  } else if (tempFora <= 20 && temp <= 20 && prox == 1) {
     classe_alerta = "alerta container card";
     document.getElementById(`alerta_quarto_${idQuarto}`).innerHTML =
       "Manter janela fechada e desligar ar-condicionado (caso ligado)";
     document.getElementById(`descricao_alerta_quarto_${idQuarto}`).innerHTML =
       "Condições inadequadas 🚨";
+  } else {
+    classe_alerta = "umidade-ideal container card";
+    document.getElementById(`titulo_alerta_${idQuarto}`).innerHTML =
+      "";
+    document.getElementById(`alerta_quarto_${idQuarto}`).innerHTML =
+      "Sem alertas";
+    document.getElementById(`descricao_alerta_quarto_${idQuarto}`).innerHTML =
+      "Condições adequadas ✅";
   }
   //FIZ ATÉ o 4***********
 

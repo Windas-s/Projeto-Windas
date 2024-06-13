@@ -29,22 +29,28 @@ function alertar(resposta, idQuarto) {
         frio: 19,
     };
 
+
+
     let classe_temperatura = 'cor-alerta';
 
-    if (temp < limites.ideal) {
-        classe_temperatura = 'temperatura-baixa container card';
-        document.getElementById(`descricao_quarto_${idQuarto}`).innerHTML = 'Temperatura baixa';
-        document.getElementById(`temp_quarto_${idQuarto}`).innerHTML += "⚠️";
-    }
-    else if (temp >= limites.ideal && temp <= limites.quente) {
-        classe_temperatura = 'temperatura-ideal container card';
-        document.getElementById(`descricao_quarto_${idQuarto}`).innerHTML = 'Temperatura ideal';
-    }
-    else if (temp > limites.quente) {
-        classe_temperatura = 'temperatura-quente container card';
-        document.getElementById(`descricao_quarto_${idQuarto}`).innerHTML = 'Temperatura acima';
-        document.getElementById(`temp_quarto_${idQuarto}`).innerHTML += "⚠️";
-    }
+    if (temp <= 20.5) {
+    classe_temperatura = "temperatura-baixa container card";
+    document.getElementById(`descricao_quarto_${idQuarto}`).innerHTML =
+      "Temperatura baixa🌡️";
+  } else if (
+    temp <= 25 &&
+    temp > 20.5
+  ) {
+    classe_temperatura = "temperatura-ideal container card";
+    document.getElementById(`descricao_quarto_${idQuarto}`).innerHTML =
+      "Temperatura ideal🌡️";
+
+  } else if (temp > 25) {
+    classe_temperatura = "temperatura-quente container card";
+    document.getElementById(`descricao_quarto_${idQuarto}`).innerHTML =
+      "Temperatura acima🌡️";
+  }
+
 
     let card;
 
