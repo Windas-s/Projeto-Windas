@@ -52,15 +52,15 @@
 
         <div class="inputs">
           <input placeholder="Email" id="login_input_email" />
-          <span id="loginEmailErro" class="mensagemErro"></span>
 
           <input placeholder="Senha" id="login_input_senha" type="password" />
 
-          <span id="loginSenhaErro" class="mensagemErro"></span>
-
+          <span id="mensagem_erro_login" class="mensagemErro"></span>
+          
           <button class="login-button" onclick="entrar()">Login</button>
-
+          
           <div id="div_login"></div>
+          
 
           <div class="nao_tem_conta">
             <h5>Novo na Winda's?</h5>
@@ -85,7 +85,7 @@
     var senhaVar = login_input_senha.value;
 
     if (emailVar == "" || senhaVar == "") {
-      alert("Por favor, preencha todos os campos");
+      mensagem_erro_login.innerHTML = "Por favor, preencha todos os campos";
       return false;
     }
 
@@ -122,8 +122,7 @@
             }, 1000); // apenas para exibir o loading
           });
         } else {
-          console.log("Houve um erro ao tentar realizar o login!");
-
+          mensagem_erro_login.innerHTML = 'Email ou senha inválidos';
           resposta.text().then((texto) => {
             console.error(texto);
           });

@@ -133,12 +133,12 @@ input {
 
 .mensagemErro {    
     display: flex;
-    justify-content: start;
+    justify-content: center;
     position: absolute;
-    left: 25%;
-    padding-left: 1.875rem;
+    left: 20%;
+    /* padding-left: 1.875rem; */
     width: 28.75rem;
-    text-align: left;
+    text-align: center;
     font-size: 10pt;
     margin-top: -2.25rem;
     color: red;

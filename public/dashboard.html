@@ -20,7 +20,7 @@
   </head>
   <!-- validarSessao() -->
 
-  <body onload="chamarApi(), preencherSelectAndares(), setTimeout(exibirQuartosDoUsuario, 2000)">
+  <body onload="chamarApi(), preencherSelectAndares(), exibirQuartosDoUsuario(), obterDadosGrafico()">
     <div class="grid_container">
       <aside class="aside">
         <div class="usuario_container">
@@ -40,17 +40,6 @@
         </li>
         <ul id="ul_quartos"></ul>
       </aside>
-      <!-- <header class="cabecalho">
-        <ul class="navbar">
-          <li>Inicial</li>
-          <li>Simulador</li>
-        </ul>
-        <img src="img/logo.svg" />
-        <ul class="navbar">
-          <li>Sobre nós</li>
-          <li>Fale conosco</li>
-        </ul>
-      </header> -->
 
       <div class="clima_tempo_container">
         <h1 id="cidade">São Paulo</h1>
@@ -70,8 +59,9 @@
       </div>
 
       <div class="titulos_metricas">
-        <span id="temperatura">Temperatura</span>
-        <span id="umidade">Umidade</span>
+        <span id="temperatura">Metricas de Temperatura</span>
+        <spa id="umidade">Metricas de Umidade</spa
+          n>
       </div>
       <div class="container_metricas">
         <div class="container-metricas-temperaturas">
@@ -159,7 +149,10 @@
 
   function mostrarInfo(json) {
     document.querySelector("#cidade").innerHTML =
-      `${json.cidade}, ${json.pais}`;
+      `${json.cidade}`;
+
+      document.querySelector("#cidade").innerHTML +=
+      `- clima externo`;
 
     document.querySelector("#temp_value").innerHTML = `${json.temp
       .toFixed(1)
@@ -225,66 +218,35 @@
   }
 
   function exibirQuartosDoUsuario() {
-    var quartos = JSON.parse(sessionStorage.quartos);
-    var ul_quartos = document.getElementById("ul_quartos");
-    ul_quartos.innerHTML = "";
+  var quartos = JSON.parse(sessionStorage.quartos);
+  var ul_quartos = document.getElementById("ul_quartos");
+  ul_quartos.innerHTML = "";
 
-    var andarSelecionado = document.getElementById("andar_select").value;
+  var andarSelecionado = document.getElementById("andar_select").value;
 
-    // Filtrar quartos por andar
-    if (andarSelecionado) {
-      quartos = quartos.filter((quarto) => quarto.andar === andarSelecionado);
-    }
-
-    quartos.forEach((item) => {
-      fetch(`/medidas/tempo-real/${item.idQuarto}`, { cache: "no-store" })
-        .then(function (response) {
-          if (response.ok) {
-            response.json().then(function (resposta) {
-              const ultimoDado = resposta[0];
-              const alerta = verificarAlertas(
-                ultimoDado.temperatura,
-                ultimoDado.umidade,
-              );
-
-              ul_quartos.innerHTML += `
-                    <li class="btn_quarto" id='btn_quarto_${item.numero}' 
-                        onclick="obterDadosGrafico(${item.idQuarto}, ${item.numero})">
-                      <img src="img/cama.svg" />
-                      Quarto ${item.numero}
-                      ${
-                        alerta
-                          ? '<span class="alerta-li"><img src="img/alert.png" class="alerta-li"/></span>'
-                          : ""
-                      }
-                    </li>
-                  `;
-            });
-          } else {
-            console.error("Nenhum dado encontrado ou erro na API");
-          }
-        })
-        .catch(function (error) {
-          console.error(
-            `Erro na obtenção dos dados p/ gráfico: ${error.message}`,
-          );
-        });
-    });
-
-    ul_quartos.innerHTML += `
-    <li class="btn-sair">
-            <img src="../img/cama.svg" /><a onclick="limparSessao()"
-              >Sair</a
-            >
-          </li>`;
-
-    // Selecionar o primeiro quarto por padrão
-    if (quartos.length > 0) {
-      setTimeout(() => {
-        obterDadosGrafico(quartos[0].idQuarto, quartos[0].numero);
-      }, 1000);
-    }
+  // Filtrar quartos por andar, se selecionado
+  if (andarSelecionado) {
+    quartos = quartos.filter((quarto) => quarto.andar === andarSelecionado);
   }
+
+  quartos.forEach((item) => {
+    // Lógica para exibir quartos na interface
+    ul_quartos.innerHTML += `
+      <li class="btn_quarto" id='btn_quarto_${item.numero}' 
+          onclick="obterDadosGrafico(${item.idQuarto}, ${item.numero})">
+        <img src="img/cama.svg" />
+        Quarto ${item.numero}
+      </li>
+    `;
+  });
+
+  // Selecionar o primeiro quarto por padrão
+  if (quartos.length > 0) {
+    setTimeout(() => {
+      obterDadosGrafico(quartos[0].idQuarto, quartos[0].numero);
+    }, 1000);
+  }
+}
 
   function verificarAlertas(temperatura, umidade) {
     const limitesTemperatura = {
