@@ -20,7 +20,7 @@
   </head>
   <!-- validarSessao() -->
 
-  <body onload="chamarApi(), preencherSelectAndares(), setTimeout(exibirQuartosDoUsuario, 1000), obterDadosGrafico()">
+  <body onload="chamarApi(), preencherSelectAndares(), exibirQuartosDoUsuario(), obterDadosGrafico()">
     <div class="grid_container">
       <aside class="aside">
         <div class="usuario_container">
@@ -218,55 +218,35 @@
   }
 
   function exibirQuartosDoUsuario() {
-    var quartos = JSON.parse(sessionStorage.quartos);
-    var ul_quartos = document.getElementById("ul_quartos");
-    ul_quartos.innerHTML = "";
+  var quartos = JSON.parse(sessionStorage.quartos);
+  var ul_quartos = document.getElementById("ul_quartos");
+  ul_quartos.innerHTML = "";
 
-    var andarSelecionado = document.getElementById("andar_select").value;
+  var andarSelecionado = document.getElementById("andar_select").value;
 
-    // Filtrar quartos por andar
-    if (andarSelecionado) {
-      quartos = quartos.filter((quarto) => quarto.andar === andarSelecionado);
-    }
-
-    quartos.forEach((item) => {
-      fetch(`/medidas/tempo-real/${item.idQuarto}`, { cache: "no-store" })
-        .then(function (response) {
-          if (response.ok) {
-            response.json().then(function (resposta) {
-              ul_quartos.innerHTML += `
-                    <li class="btn_quarto" id='btn_quarto_${item.numero}' 
-                        onclick="obterDadosGrafico(${item.idQuarto}, ${item.numero})">
-                      <img src="img/cama.svg" />
-                      Quarto ${item.numero}
-                    </li>
-                  `;
-            });
-          } else {
-            console.error("Nenhum dado encontrado ou erro na API");
-          }
-        })
-        .catch(function (error) {
-          console.error(
-            `Erro na obtenção dos dados p/ gráfico: ${error.message}`,
-          );
-        });
-    });
-
-    ul_quartos.innerHTML += `
-    <li class="btn-sair">
-            <img src="../img/cama.svg" /><a onclick="limparSessao()"
-              >Sair</a
-            >
-          </li>`;
-
-    // Selecionar o primeiro quarto por padrão
-    if (quartos.length > 0) {
-      setTimeout(() => {
-        obterDadosGrafico(quartos[0].idQuarto, quartos[0].numero);
-      }, 1000);
-    }
+  // Filtrar quartos por andar, se selecionado
+  if (andarSelecionado) {
+    quartos = quartos.filter((quarto) => quarto.andar === andarSelecionado);
   }
+
+  quartos.forEach((item) => {
+    // Lógica para exibir quartos na interface
+    ul_quartos.innerHTML += `
+      <li class="btn_quarto" id='btn_quarto_${item.numero}' 
+          onclick="obterDadosGrafico(${item.idQuarto}, ${item.numero})">
+        <img src="img/cama.svg" />
+        Quarto ${item.numero}
+      </li>
+    `;
+  });
+
+  // Selecionar o primeiro quarto por padrão
+  if (quartos.length > 0) {
+    setTimeout(() => {
+      obterDadosGrafico(quartos[0].idQuarto, quartos[0].numero);
+    }, 1000);
+  }
+}
 
   function verificarAlertas(temperatura, umidade) {
     const limitesTemperatura = {

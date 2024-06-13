@@ -27,21 +27,17 @@
             >
           </li>
           <li>
-            <img src="../img/cama.svg" /><a href="../dashboard.html"
-              >Quartos</a
-            >
+            <img src="../img/cama.svg" /><a href="../dashboard.html">Quartos</a>
           </li>
           <li class="btn-sair">
-            <img src="../img/cama.svg" /><a onclick="limparSessao()"
-              >Sair</a
-            >
+            <img src="../img/cama.svg" /><a onclick="limparSessao()">Sair</a>
           </li>
         </ul>
       </aside>
 
       <div class="titulos_metricas">
         <span id="temperatura">Metricas Temperatura</span>
-        <span id="Umidade">Umidade</span>
+        <span id="Umidade">Metricas Umidade</span>
       </div>
 
       <div class="container_metricas">
@@ -75,17 +71,29 @@
 </html>
 
 <script>
-    function exibirQuartos() {
+  function exibirQuartos() {
     const quartos = JSON.parse(sessionStorage.quartos);
-    
+    console.log('teste')
+
     quartos.forEach((item) => {
       document.getElementById("cardQuartos").innerHTML += `
-        <div id="card_${item.idQuarto}">
-          <h3 class="titulo_container">Quarto ${item.numero}</h3>
-          <p class="paragrafo_container" id="temp_quarto_${item.idQuarto}">${item.temperatura}°C 🌡️</p>
-          <span id="descricao_quarto_${item.idQuarto}" style='font-weight: bold'></span>
-        </div>
-      `;
+      <div id="card_${item.idQuarto}" onclick="irParaPaginaQuarto(${item.idQuarto})" style="cursor: pointer;">
+        <h3 class="titulo_container">Quarto ${item.numero}</h3>
+        <p class="paragrafo_container" id="temp_quarto_${item.idQuarto}">${item.temperatura}°C 🌡️</p>
+        <span id="descricao_quarto_${item.idQuarto}" style='font-weight: bold'></span>
+      </div>
+    `;
     });
   }
+
+  function irParaPaginaQuarto(idQuarto) {
+  // Criar um elemento <a> dinamicamente
+  var link = document.createElement('a');
+  // Definir o href para a página do quarto específico, com o idQuarto como parâmetro
+  link.href = `../dashboard.html`;
+  // Abrir o link em uma nova aba
+  // Clicar no link programaticamente
+  link.click();
+}
+
 </script>
