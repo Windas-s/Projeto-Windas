@@ -24,6 +24,7 @@ function buscarMedidasEmTempoReal(idQuarto) {
         round(l.dht11_umidade) AS umidade,
         round(i.temperatura) AS temperaturaFora, 
         round(i.umidade) AS umidadeFora,
+        l.proximidade as janela,
         l.dataHora,
             DATE_FORMAT(l.dataHora, '%H:%i:%s') AS momento_grafico,
             l.fk_sistema_sensor 
