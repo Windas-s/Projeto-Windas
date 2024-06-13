@@ -165,30 +165,7 @@
     }
 
     
-    // if (btu == 7500) {
-      //   kwh = 15.7;
-      // } else if (btu == 9000) {
-        //   kwh = 17.1;
-        // } else if (btu == 10000) {
-    //   kwh = 20.2;
-    // } else if (btu == 12000) {
-    //   kwh = 22.7;
-    // } else if (btu == 24000) {
-    //   kwh = 38.6;
-    // } else if (btu == 30000) {
-    //   kwh = 54.1;
-    // } else if (btu == 36000) {
-    //   kwh = 61.3;
-    // } else if (btu == 48000) {
-    //   kwh = 89.3;
-    // } else if (btu == 60000) {
-      //   kwh = 104.4;
-    // }
 
-
-    //let gastoFinal = ((((kwh * horasUso * valorTarifa)) * 365) * qtdArCondicionado);
-    // let kwhAno = ((kwh * horasUso) / 30) * 365;
-    // let economia = gastoFinal - (gastoFinal * 0.15);
     let potencia = btu * 0.2929
     let consumoDiario = potencia * horasUso/1000
     let consumoAnual = consumoDiario * 365
@@ -196,12 +173,7 @@
     let gastoFinal = consumoTotal * valorTarifa
     let economia = gastoFinal - (gastoFinal * 0.15)
     let totalEconomizado = gastoFinal - economia
-    
-    // let kwhAno = potencia * horasUso * 365/1000   
-    // let gastoFinal = kwhAno * valorTarifa
-    // let economia = gastoFinal - (gastoFinal * 0.15)
-
-
+  
     
     principal.style.animation = "animMain 1s";
     document.getElementById("div_resultado").innerHTML = div_resultado.style.display = 'flex';
@@ -214,7 +186,7 @@
     div_resultado2.innerHTML = `15% da sua conta de energia, <br>poderá ser reduzida utilizando nosso sistema. <br> 
     Fazendo com que os gastos de: <b style="color: red;">${gastoFinal.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})}</b>
     Passem a ser de: <b style="color: green;">${(economia.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'}))}</b>
-    Gerando uma economia anual de: <b style="color: green;">${(totalEconomizado.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'}))}</b>`
+    Gerando uma economia anual de até: <b style="color: green;">${(totalEconomizado.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'}))}</b>`
     
       div_resultado3.innerHTML = `O uso exagerado do ar-condicionado pode acarretar em diversos problemas ecológicos como uma grande emissão de CO2, que é um contribuidor direto ao efeito estufa, além de gerar um consumo de energia exagerado.
 <br>Portanto, adquira sua solução: <b style="color: #2182BF;">Winda's</b>`
