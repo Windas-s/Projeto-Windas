@@ -10,7 +10,9 @@
     <script src="../js/sessao.js"></script>
   </head>
 
-  <body onload="validarSessao(), exibirQuartos(), atualizacaoPeriodica()">
+  <body
+    onload="validarSessao(), exibirQuartos(), atualizacaoPeriodica(), preencherSelectAndares()"
+  >
     <div class="grid_container">
       <aside class="aside">
         <div class="usuario_container">
@@ -27,6 +29,10 @@
             >
           </li>
           <li>
+            <img src="../img/cama.svg" />
+            <select id="andar_select" onchange="exibirQuartos()"></select>
+          </li>
+          <li>
             <img src="../img/cama.svg" /><a href="../dashboard.html">Quartos</a>
           </li>
           <li class="btn-sair">
@@ -37,7 +43,7 @@
 
       <div class="titulos_metricas">
         <span id="temperatura">Metricas Temperatura</span>
-        <span id="Umidade">Metricas Umidade</span>
+        <span id="Umidade">Umidade</span>
       </div>
 
       <div class="container_metricas">
@@ -65,35 +71,67 @@
           </div>
         </div>
       </div>
-      <div id="cardQuartos"></div>
+      <div id="cardQuartos" style="cursor: pointer;"></div>
     </div>
   </body>
 </html>
 
 <script>
-  function exibirQuartos() {
-    const quartos = JSON.parse(sessionStorage.quartos);
-    console.log('teste')
+  function exibirQuartos(idQuarto, numero) {
+    var quartos = JSON.parse(sessionStorage.quartos);
+    var andarSelecionado = document.getElementById("andar_select").value;
+
+    // Limpa o conteúdo atual dos quartos
+    document.getElementById("cardQuartos").innerHTML = "";
+
+    if (andarSelecionado) {
+      quartos = quartos.filter((quarto) => quarto.andar === andarSelecionado);
+    }
 
     quartos.forEach((item) => {
       document.getElementById("cardQuartos").innerHTML += `
-      <div id="card_${item.idQuarto}" onclick="irParaPaginaQuarto(${item.idQuarto})" style="cursor: pointer;">
-        <h3 class="titulo_container">Quarto ${item.numero}</h3>
-        <p class="paragrafo_container" id="temp_quarto_${item.idQuarto}">${item.temperatura}°C 🌡️</p>
-        <span id="descricao_quarto_${item.idQuarto}" style='font-weight: bold'></span>
-      </div>
-    `;
+        <div id="card_${item.idQuarto}" onclick="salvarDadosQuarto(${item.idQuarto}, '${item.numero}')">
+          <h3 class="titulo_container">Quarto ${item.numero}</h3>
+          <p class="paragrafo_container" id="temp_quarto_${item.idQuarto}">${item.temperatura}°C 🌡️</p>
+          <span id="descricao_quarto_${item.idQuarto}" style='font-weight: bold'></span>
+        </div>
+      `;
     });
   }
 
-  function irParaPaginaQuarto(idQuarto) {
-  // Criar um elemento <a> dinamicamente
-  var link = document.createElement('a');
-  // Definir o href para a página do quarto específico, com o idQuarto como parâmetro
-  link.href = `../dashboard.html`;
-  // Abrir o link em uma nova aba
-  // Clicar no link programaticamente
-  link.click();
-}
+  function salvarDadosQuarto(idQuarto, numero) {
+    let dados = {
+      idQuarto: idQuarto,
+      numero: numero,
+    };
 
+    let dadosJSON = JSON.stringify(dados);
+
+    sessionStorage.setItem("dadosLeitura", dadosJSON);
+    window.location.href = "../dashboard.html"; 
+  }
+
+  function preencherSelectAndares() {
+    var quartos = JSON.parse(sessionStorage.quartos);
+    var selectAndar = document.getElementById("andar_select");
+
+    // Limpa as opções atuais
+    selectAndar.innerHTML = "";
+
+    var andares = [...new Set(quartos.map((quarto) => quarto.andar))]; // Remover duplicatas
+
+    // Adiciona uma opção padrão
+    var optionDefault = document.createElement("option");
+    optionDefault.value = "";
+    optionDefault.textContent = "Selecione um andar";
+    selectAndar.appendChild(optionDefault);
+
+    // Preenche o select com os andares
+    andares.forEach((andar) => {
+      var option = document.createElement("option");
+      option.value = andar;
+      option.textContent = andar;
+      selectAndar.appendChild(option);
+    });
+  }
 </script>

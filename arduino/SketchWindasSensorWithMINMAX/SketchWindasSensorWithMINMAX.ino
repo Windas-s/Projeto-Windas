@@ -27,55 +27,457 @@ void loop() {
   if (isnan(temperatura) or isnan(umidade)) {  // Se houver algum erro e não devolver os dados em numeros exibe a mensagem:
     Serial.println("Erro ao ler");             // ERRO AO LER
   } else {
-    Serial.print(chave);  //imprime no monitor Serial Valor da Umidade
-    Serial.print(",");
-    Serial.print(umidade);  //imprime no monitor Serial Valor da Umidade
-    Serial.print(",");
-    Serial.print(temperatura + 1);
-    Serial.print(",");
-    Serial.println(fksensor);
-    Serial.print(chave);  //imprime no monitor Serial Valor da Umidade
-    Serial.print(",");
-    Serial.print(umidade - 1);  //imprime no monitor Serial Valor da Umidade
-    Serial.print(",");
-    Serial.print(temperatura + 3);
-    Serial.print(",");
-    Serial.println(fksensor + 3); 
-    Serial.print(chave); 
-    Serial.print(",");
-    Serial.print(umidade - 2);  
-    Serial.print(",");
-    Serial.print(temperatura + 8);
-    Serial.print(",");
-    Serial.println(fksensor + 4);
-    Serial.print(chave); 
-    Serial.print(",");
-    Serial.print(umidade - 3);  
-    Serial.print(",");
-    Serial.print(temperatura + 6);
-    Serial.print(",");
-    Serial.println(fksensor + 5);
-    Serial.print(chave); 
-    Serial.print(",");
-    Serial.print(umidade + 10);  
-    Serial.print(",");
-    Serial.print(temperatura + 10);
-    Serial.print(",");
-    Serial.println(fksensor + 6);
-    Serial.print(chave); 
-    Serial.print(",");
-    Serial.print(umidade - 3);  
-    Serial.print(",");
-    Serial.print(temperatura + 9);
-    Serial.print(",");
-    Serial.println(fksensor + 7);  
-    Serial.print(chave); 
-    Serial.print(",");
-    Serial.print(umidade - 15);  
-    Serial.print(",");
-    Serial.print(temperatura + 12);
-    Serial.print(",");
-    Serial.println(fksensor + 8);
+
+// Quarto 1
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade + 3);
+Serial.print(",");
+Serial.print(temperatura + 1);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 2
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade + 2);
+Serial.print(",");
+Serial.print(temperatura + 2);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 3
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade + 1);
+Serial.print(",");
+Serial.print(temperatura + 3);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 4
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade + 10);
+Serial.print(",");
+Serial.print(temperatura + 4);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 5
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 5);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 6
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 6);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 7
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 7);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 8
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 8);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 9
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 9);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 10
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 10);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 11
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 11);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 12
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 1);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 13
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 2);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 14
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 3);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 15
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura - 10);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 16
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura - 9);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 17
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura - 5);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 18
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura - 2);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 19
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura - 1);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 20
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 21
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 4);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 22
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 9);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 23
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 3);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 24
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 2);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 25
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura +6);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 26
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 27
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura - 10);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 28
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 20);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 29
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 5);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 30
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 10);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 31
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 9);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 32
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 2);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 33
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 3);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 34
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 4);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 35
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 5);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 36
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 6);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 37
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura - 7);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 38
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 8);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 39
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 3);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 40
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 4);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 41
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 4);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 42
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 2);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 43
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 3);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 44
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura - 4);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 45
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 46
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 47
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 48
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 1);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 49
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 2);
+Serial.print(",");
+Serial.println(fksensor++);
+
+// Quarto 50
+Serial.print(chave);
+Serial.print(",");
+Serial.print(umidade);
+Serial.print(",");
+Serial.print(temperatura + 1);
+Serial.print(",");
+Serial.println(fksensor++);
+
   }
 
   delay(10000);  // Tempo para consultar os dados novamente

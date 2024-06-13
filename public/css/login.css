@@ -3,6 +3,7 @@
 
 * {
     color: #000;
+    overflow-x: hidden;
 }
 
 body {
