@@ -33,7 +33,7 @@
           <input required="" type="text" id="input_qtd_ar_condicionado" placeholder="Ex: 2">
           <span class="highlight"></span>
           <span class="bar"></span><br>
-          <h4>Por quantas horas permanecem ligados<br>(em média):</h4>
+          <h4>Por quantas horas permanecem ligados diariamente<br>(em média):</h4>
           <input required="" type="text" id="input_qtd_horas" placeholder="Quantidade de horas">
           <span class="highlight2"></span>
           <span class="bar2"></span><br>
@@ -117,7 +117,7 @@
     let kwh = 0;
     let valorTarifa = 0;
 
-    if (isNaN(qtdArCondicionado) || isNaN(horasUso) || isNaN(btu) || regiao === 'Selecione o estado' || btu === 'Selecione o valor da potência em BTUs') {
+    if (isNaN(qtdArCondicionado) || isNaN(horasUso) ||horasUso > 24 || isNaN(btu) || regiao === 'Selecione o estado' || btu === 'Selecione o valor da potência em BTUs') {
       document.getElementById("alerta").style.display = 'block';
       return;
     } else {
@@ -164,29 +164,44 @@
       valorTarifa = 0.65;
     }
 
-    if (btu == 7500) {
-      kwh = 15.7;
-    } else if (btu == 9000) {
-      kwh = 17.1;
-    } else if (btu == 10000) {
-      kwh = 20.2;
-    } else if (btu == 12000) {
-      kwh = 22.7;
-    } else if (btu == 24000) {
-      kwh = 38.6;
-    } else if (btu == 30000) {
-      kwh = 54.1;
-    } else if (btu == 36000) {
-      kwh = 61.3;
-    } else if (btu == 48000) {
-      kwh = 89.3;
-    } else if (btu == 60000) {
-      kwh = 104.4;
-    }
+    
+    // if (btu == 7500) {
+      //   kwh = 15.7;
+      // } else if (btu == 9000) {
+        //   kwh = 17.1;
+        // } else if (btu == 10000) {
+    //   kwh = 20.2;
+    // } else if (btu == 12000) {
+    //   kwh = 22.7;
+    // } else if (btu == 24000) {
+    //   kwh = 38.6;
+    // } else if (btu == 30000) {
+    //   kwh = 54.1;
+    // } else if (btu == 36000) {
+    //   kwh = 61.3;
+    // } else if (btu == 48000) {
+    //   kwh = 89.3;
+    // } else if (btu == 60000) {
+      //   kwh = 104.4;
+    // }
 
-    let gastoFinal = ((((kwh * horasUso * valorTarifa) / 30) * 365) * qtdArCondicionado);
-    let kwhAno = ((kwh * horasUso) / 30) * 365;
-    let economia = gastoFinal - (gastoFinal * 0.15);
+
+    //let gastoFinal = ((((kwh * horasUso * valorTarifa)) * 365) * qtdArCondicionado);
+    // let kwhAno = ((kwh * horasUso) / 30) * 365;
+    // let economia = gastoFinal - (gastoFinal * 0.15);
+    let potencia = btu * 0.2929
+    let consumoDiario = potencia * horasUso/1000
+    let consumoAnual = consumoDiario * 365
+    let consumoTotal = consumoAnual * qtdArCondicionado
+    let gastoFinal = consumoTotal * valorTarifa
+    let economia = gastoFinal - (gastoFinal * 0.15)
+    let totalEconomizado = gastoFinal - economia
+    
+    // let kwhAno = potencia * horasUso * 365/1000   
+    // let gastoFinal = kwhAno * valorTarifa
+    // let economia = gastoFinal - (gastoFinal * 0.15)
+
+
     
     principal.style.animation = "animMain 1s";
     document.getElementById("div_resultado").innerHTML = div_resultado.style.display = 'flex';
@@ -194,11 +209,12 @@
     document.getElementById("div_resultado").innerHTML = div_resultado3.style.display = 'flex';
 
     div_resultado.innerHTML = `Seu gasto anual de energia com sistemas de ar-condicionado é de: <b style="color: red;">
-      ${kwhAno.toFixed(2)}</b> kWh/ano.`;
+      ${consumoTotal.toFixed(2)}</b> kWh/ano.`;
       
     div_resultado2.innerHTML = `15% da sua conta de energia, <br>poderá ser reduzida utilizando nosso sistema. <br> 
     Fazendo com que os gastos de: <b style="color: red;">${gastoFinal.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})}</b>
-    Passem a ser de: <b style="color: green;">${(economia.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'}))}</b>`
+    Passem a ser de: <b style="color: green;">${(economia.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'}))}</b>
+    Gerando uma economia anual de: <b style="color: green;">${(totalEconomizado.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'}))}</b>`
     
       div_resultado3.innerHTML = `O uso exagerado do ar-condicionado pode acarretar em diversos problemas ecológicos como uma grande emissão de CO2, que é um contribuidor direto ao efeito estufa, além de gerar um consumo de energia exagerado.
 <br>Portanto, adquira sua solução: <b style="color: #2182BF;">Winda's</b>`
