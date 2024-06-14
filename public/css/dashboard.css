@@ -345,6 +345,12 @@ a {
   border-radius: 0 4px 4px 0;
 }
 
+/* alerta */
+
+.alerta{
+  background-color: #ffcd07ff;
+}
+
 /* medidas de temperatura */
 
 .temperatura-quente {
@@ -381,12 +387,6 @@ a {
 
 .janela-fechada{
     background-color: #888888;
-}
-
-/* alerta */
-
-.alerta{
-  background-color: #ffcd07ff;
 }
 
 
