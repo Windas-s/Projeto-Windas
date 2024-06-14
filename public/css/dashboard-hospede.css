@@ -365,4 +365,46 @@ display: flex;
 
 }
 
+/* medidas de temperatura */
 
+.temperatura-quente {
+  background-color: #ff7043;
+}
+
+.temperatura-ideal {
+  background-color: #9ccc65;
+}
+
+.temperatura-baixa {
+  background-color: #3fbbec;
+}
+
+/* medidas de umidade */
+
+.umidade-abaixo{
+  background-color: #a1b9cc;
+}
+
+.umidade-ideal{
+  background-color: #9ccc65;
+}
+
+.umidade-alta{
+  background-color: #FF0000;
+}
+
+/* medida proximidade */
+
+.janela-aberta{
+  background-color: #2182bf;
+}
+
+.janela-fechada{
+    background-color: #888888;
+}
+
+/* alerta */
+
+.alerta{
+  background-color: #ffcd07ff;
+}

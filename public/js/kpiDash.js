@@ -100,10 +100,8 @@ function alertar(resposta, idQuarto) {
   /* alertas */
 
   if (
-    temp >= limitesTemperatura.ideal &&
-    temp <= limitesTemperatura.quente &&
-    tempFora >= limitesTemperatura.ideal &&
-    tempFora <= limitesTemperatura.quente
+    temp >= 21 &&
+    temp <= 25 
   ) {
     classe_alerta = "umidade-ideal container card";
     document.getElementById(`titulo_alerta_${idQuarto}`).innerHTML =
@@ -136,10 +134,22 @@ function alertar(resposta, idQuarto) {
       "Manter janela fechada e ligar ar-condicionado";
     document.getElementById(`descricao_alerta_quarto_${idQuarto}`).innerHTML =
       "Condições inadequadas 🚨";
+  }  else if(tempFora < 26 && temp >= 26 && prox == 0) {
+    lasse_alerta = "alerta container card";
+    document.getElementById(`alerta_quarto_${idQuarto}`).innerHTML =
+      "Manter janela aberta e evitar uso do ar-condicionado";
+      document.getElementById(`descricao_alerta_quarto_${idQuarto}`).innerHTML =
+      "Condições inadequadas 🚨";
+  }  else if(tempFora < 26 && temp >= 26 && prox == 1) {
+    lasse_alerta = "alerta container card";
+    document.getElementById(`alerta_quarto_${idQuarto}`).innerHTML =
+      "Abrir janela e evitar uso do ar-condicionado";
+      document.getElementById(`descricao_alerta_quarto_${idQuarto}`).innerHTML =
+      "Condições inadequadas 🚨";
   } else if (tempFora <= 20 && temp >= 26 && prox == 0) {
     classe_alerta = "alerta container card";
     document.getElementById(`alerta_quarto_${idQuarto}`).innerHTML =
-      "Manter janela aberta e evitar ligar o ar-condicionad";
+      "Manter janela aberta e evitar ligar o ar-condicionado";
     document.getElementById(`descricao_alerta_quarto_${idQuarto}`).innerHTML =
       "Condições inadequadas 🚨";
   } else if (tempFora <= 20 && temp >= 26 && prox == 1) {
@@ -169,7 +179,7 @@ function alertar(resposta, idQuarto) {
     document.getElementById(`descricao_alerta_quarto_${idQuarto}`).innerHTML =
       "Condições adequadas ✅";
   }
-  //FIZ ATÉ o 4***********
+  
 
   let card;
 
