@@ -135,13 +135,13 @@ function alertar(resposta, idQuarto) {
     document.getElementById(`descricao_alerta_quarto_${idQuarto}`).innerHTML =
       "Condições inadequadas 🚨";
   }  else if(tempFora < 26 && temp >= 26 && prox == 0) {
-    lasse_alerta = "alerta container card";
+    classe_alerta = "alerta container card";
     document.getElementById(`alerta_quarto_${idQuarto}`).innerHTML =
       "Manter janela aberta e evitar uso do ar-condicionado";
       document.getElementById(`descricao_alerta_quarto_${idQuarto}`).innerHTML =
       "Condições inadequadas 🚨";
   }  else if(tempFora < 26 && temp >= 26 && prox == 1) {
-    lasse_alerta = "alerta container card";
+    classe_alerta = "alerta container card";
     document.getElementById(`alerta_quarto_${idQuarto}`).innerHTML =
       "Abrir janela e evitar uso do ar-condicionado";
       document.getElementById(`descricao_alerta_quarto_${idQuarto}`).innerHTML =
